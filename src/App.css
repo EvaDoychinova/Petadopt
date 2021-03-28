@@ -1,4 +1,20 @@
+body{
+  color: #353536;
+  font-size: 16px;
+}
 
+.body-container{
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
+
+.main-container{
+  display: flex;
+  flex: 1 0 auto;
+}
 
 /* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
