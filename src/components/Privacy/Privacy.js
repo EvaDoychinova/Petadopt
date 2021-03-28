@@ -1,10 +1,12 @@
+import {Fragment} from 'react';
+
 import './Privacy.css';
 
 const Privacy = ()=>{
     return(
-        <div>
+        <Fragment>
             <h1>Privacy Policy</h1>
-        </div>
+        </Fragment>
     );
 }
 
