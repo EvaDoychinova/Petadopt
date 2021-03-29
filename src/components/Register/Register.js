@@ -1,18 +1,16 @@
-import { Fragment } from 'react';
-
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 import './Register.css';
 
 const Register = () => {
     return (
-        <Fragment>
-            <h2 className="pb-3">Register Page</h2>
+        <div className="register-form-content">
+            <h2 className="text-center pb-3">Register Page</h2>
 
             <Form className="m-auto">
                 <FormGroup>
                     <Label htmlFor="email">Email</Label>
-                    <Input type="email" name="email" id="email" className="form-control"/>
+                    <Input type="email" name="email" id="email" className="form-control" />
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password</Label>
@@ -24,7 +22,7 @@ const Register = () => {
                 </FormGroup>
                 <Button color="info">Register</Button>
             </Form>
-        </Fragment>
+        </div>
     );
 }
 

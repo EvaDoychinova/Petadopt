@@ -1,0 +1,9 @@
+.login-form-content{
+    min-width:260px;
+}
+
+@media(min-width:576px){
+	.login-form-content{
+		width:320px;
+	}
+}

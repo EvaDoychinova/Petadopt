@@ -1,0 +1,16 @@
+.pet-add-form-content{
+    min-width:260px;
+	width:50vw;
+}
+
+@media(min-width:576px){
+	.pet-add-form-content{
+		width:400px;
+	}
+}
+
+@media(min-width:768px){
+	.pet-add-form-content{
+		width:500px;
+	}
+}

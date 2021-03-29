@@ -26,9 +26,36 @@
     font-weight: 500;
     padding: 15px;
     color:#353536;
-    margin: auto 0;
 }
 
 .header-link:hover{
     text-decoration: none;
 }
+
+.menu-bars{
+    color:#353536;
+}
+
+.dropdown-link{
+    color:#138496;
+}
+
+.dropdown-link:hover{
+    text-decoration: none;
+}
+
+.screen-navigation{
+    margin: auto 0;
+    display:none;
+}
+
+@media(min-width: 768px){
+    .screen-navigation{
+        display:block;
+    }
+    
+    .phone-navigation{
+        display:none;
+    }
+}
+

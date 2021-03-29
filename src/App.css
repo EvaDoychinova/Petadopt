@@ -25,22 +25,9 @@ body{
 	border-radius: 15px;
 	padding: 30px;
 	margin:0;
-	min-width:280px;
-	width:35vw;
+	min-width:260px;
 	box-shadow: 0 0 4px rgb(0 0 0 / 60%);
 	flex: 0 1 auto;
-}
-
-@media(min-width:992px){
-	.main-content{
-		width:30vw;
-	}
-}
-
-@media(min-width:1200px){
-	.main-content{
-		width:25vw;
-	}
 }
 
 /* @media (prefers-reduced-motion: no-preference) {
