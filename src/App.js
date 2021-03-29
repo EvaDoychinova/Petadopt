@@ -10,9 +10,7 @@ import Register from './components/Register';
 import Login from './components/Login';
 import PetsAll from './components/PetsAll';
 import PetDetails from './components/PetDetails';
-import PetCreate from './components/PetCreate';
-
-import { Button } from 'reactstrap';
+import PetAdd from './components/PetAdd';
 
 import './App.css';
 
@@ -21,7 +19,7 @@ const App = () => {
 		<div className="body-container">
 			<Header />
 			<div className="main-container">
-				<div className="container text-center">
+				<div className="main-content text-center m-auto">
 					<Switch>
 						<Route path="/" exact component={Home}/>
 						<Route path="/about" exact component={About}/>
@@ -30,7 +28,7 @@ const App = () => {
 						<Route path="/register" exact component={Register}/>
 						<Route path="/login" exact component={Login}/>
 						<Route path="/pets" exact component={PetsAll} />
-						<Route path="/pets/create" component={PetCreate}/>
+						<Route path="/pets/add" component={PetAdd}/>
 						<Route path="/pets/:id" component={PetDetails}/>
 						
 						<Route component={Error}/>

@@ -1,5 +1,6 @@
 .header{
-    background-color: #02f4fc;
+    /* background-color: #02f4fc; */
+    background-color: #67e1f7;
     box-shadow: 0 0 6px rgb(0 0 0 / 60%);
 }
 
@@ -11,7 +12,7 @@
 }
 
 .header-logo{
-    font-size: 40px;
+    font-size: 36px;
     font-weight: 500;
     color: #353536;
     padding: 10px 50px;

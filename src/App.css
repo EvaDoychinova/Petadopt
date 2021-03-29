@@ -15,6 +15,32 @@ body{
   display: flex;
   flex: 1 0 auto;
   padding: 30px;
+  background-image: url('https://cdn.wallpapersafari.com/8/93/lRDa6m.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main-content{
+	background-color: #FFF;
+	border-radius: 15px;
+	padding: 30px;
+	margin:0;
+	min-width:280px;
+	width:35vw;
+	box-shadow: 0 0 4px rgb(0 0 0 / 60%);
+	flex: 0 1 auto;
+}
+
+@media(min-width:992px){
+	.main-content{
+		width:30vw;
+	}
+}
+
+@media(min-width:1200px){
+	.main-content{
+		width:25vw;
+	}
 }
 
 /* @media (prefers-reduced-motion: no-preference) {
