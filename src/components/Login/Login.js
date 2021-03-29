@@ -16,7 +16,9 @@ const Login = () => {
                     <Label htmlFor="password">Password</Label>
                     <Input type="password" name="password" id="password" />
                 </FormGroup>
-                <Button color="info" className="text-center">Login</Button>
+                <FormGroup className="text-center m-0 pt-2">
+                    <Button color="info" className="text-center">Login</Button>
+                </FormGroup>
             </Form>
         </div>
     );

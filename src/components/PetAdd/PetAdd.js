@@ -3,32 +3,32 @@ import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import './PetAdd.css';
 
 const PetAdd = () => {
-    const categories=[
+    const categories = [
         {
             "id": 1,
-            "name":"Dog"
+            "name": "Dog"
         },
         {
             "id": 2,
-            "name":"Cat"
+            "name": "Cat"
         },
         {
             "id": 3,
-            "name":"Rabbit"
+            "name": "Rabbit"
         },
         {
             "id": 4,
-            "name":"Hamster"
+            "name": "Hamster"
         },
         {
             "id": 5,
-            "name":"Guinee pig"
+            "name": "Guinee pig"
         },
     ];
 
     return (
         <div className="pet-add-form-content">
-            <h2 className="text-center pb-3">Add a Pet</h2>
+            <h2 className="text-center">Add a Pet</h2>
 
             <Form className="m-auto">
                 <FormGroup>
@@ -42,13 +42,13 @@ const PetAdd = () => {
 
                 <FormGroup>
                     <Label htmlFor="category">Category</Label>
-                    <Input type="select" name="category" id="category">
-                        {categories.map(x=>
+                    <Input type="select" name="category" id="category" className="form-control-sm">
+                        {categories.map(x =>
                             <option key={x.id} value={x.id}>{x.name}</option>
                         )}
                     </Input>
                 </FormGroup>
-                <FormGroup className="row">
+                <div className="row">
                     <FormGroup className="col-6">
                         <Label htmlFor="age">Age</Label>
                         <Input type="number" increment="1" id="age" name="age" className="form-control-sm" />
@@ -57,7 +57,7 @@ const PetAdd = () => {
                         <Label htmlFor="weight">Weight</Label>
                         <Input type="number" id="weight" name="weight" className="form-control-sm" />
                     </FormGroup>
-                </FormGroup>
+                </div>
                 <FormGroup className="row col-md-8 col-lg-6 justify-content-between m-0 p-0">
                     <Label className="">Sex:</Label>
                     <FormGroup check>
@@ -78,7 +78,9 @@ const PetAdd = () => {
                     <Input type="textarea" id="description" name="description" className="form-control-sm" />
                 </FormGroup>
             </Form>
-            <Button color="info">Add a pet</Button>
+            <FormGroup className="text-center m-0">
+                <Button color="info">Add a pet</Button>
+            </FormGroup>
         </div>
     );
 }

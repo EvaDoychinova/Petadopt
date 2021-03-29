@@ -20,7 +20,9 @@ const Register = () => {
                     <Label htmlFor="rePassword">Repeat Password</Label>
                     <Input type="rePassword" name="rePassword" id="rePassword" />
                 </FormGroup>
-                <Button color="info">Register</Button>
+                <FormGroup className="text-center m-0 pt-2">
+                    <Button color="info" className="">Register</Button>
+                </FormGroup>
             </Form>
         </div>
     );
