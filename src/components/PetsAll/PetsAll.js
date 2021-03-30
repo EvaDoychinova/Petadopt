@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 
 import firebase from '../../firebase';
 
+import PetCard from '../PetCard';
+
 import './PetsAll.css';
 
 const PetsAll = () => {
@@ -33,17 +35,7 @@ const PetsAll = () => {
         <div className="pets-all-page">
             <h1>Pets All Page</h1>
             {pets.map((pet) =>
-                <div>
-                    <div className="image-wrapper">
-                        <img src={pet.imageUrl} />
-                    </div>
-                    <h4>{pet.name}</h4>
-                    <p>{pet.category}</p>
-                    <p>{pet.sex}</p>
-                    <p>{pet.age}</p>
-                    <p>{pet.weight}</p>
-                    <p>{pet.description}</p>
-                </div>
+                <PetCard key={pet.id} {...pet} />
             )}
         </div>
     );
