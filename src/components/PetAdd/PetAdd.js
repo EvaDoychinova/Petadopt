@@ -36,8 +36,8 @@ const PetAdd = () => {
                     <Input type="text" id="name" name="name" className="form-control-sm" />
                 </FormGroup>
                 <FormGroup>
-                    <Label htmlFor="image">ImageUrl</Label>
-                    <Input type="url" id="image" name="image" className="form-control-sm" />
+                    <Label htmlFor="imageUrl">ImageUrl</Label>
+                    <Input type="url" id="imageUrl" name="imageUrl" className="form-control-sm" />
                 </FormGroup>
 
                 <FormGroup>

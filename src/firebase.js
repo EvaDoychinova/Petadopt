@@ -1,19 +1,20 @@
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 
+import 'firebase/auth';
+import 'firebase/database';
 import 'firebase/firestore';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-  apiKey: "AIzaSyBBpD4PmlwAzMm4mHtkukSxCeDNJKnZdYM",
-  authDomain: "petadopt-cc847.firebaseapp.com",
-  projectId: "petadopt-cc847",
-  storageBucket: "petadopt-cc847.appspot.com",
-  messagingSenderId: "623937183677",
-  appId: "1:623937183677:web:852ff9869eee4229fa3cd4",
-  measurementId: "G-LGYGYX75P7"
+	apiKey: "AIzaSyCM6ObP2geriR_dN0UQPW2hvVDEIsSV-VA",
+    authDomain: "petadopt-878e9.firebaseapp.com",
+	databaseURL: "https://petadopt-878e9-default-rtdb.firebaseio.com",
+    projectId: "petadopt-878e9",
+    storageBucket: "petadopt-878e9.appspot.com",
+    messagingSenderId: "42814397996",
+    appId: "1:42814397996:web:369b1d2228a778d92e7b89"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-const db=firebase.firestore();
 
-export default db;
+export default firebase;
