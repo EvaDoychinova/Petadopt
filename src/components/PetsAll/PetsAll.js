@@ -18,25 +18,22 @@ const PetsAll = () => {
     const [pets, setPets] = useState([]);
 
     useEffect(() => {
-        console.log('useEffect-Ref');
-
         const dbPets = firebase.database().ref('pets/');
 
         dbPets.on('value', (res) => {
-            const data = res.val();
-            console.log(data);
             const correctPetsFormat = Object.entries(res.val()).map(([id, value]) => { return { ...value, id: id } });
-            console.log(correctPetsFormat);
             setPets(correctPetsFormat);
         })
     }, []);
 
     return (
-        <div className="pets-all-page">
-            <h1>Pets All Page</h1>
-            {pets.map((pet) =>
-                <PetCard key={pet.id} {...pet} />
-            )}
+        <div className="pets-all-page-content text-center">
+            <h1 className="text-center pb-5">Pets All Page</h1>
+            <div className="pet-cards-container row row-cols-1 row-cols-md-2 row-cols-lg-3">
+                {pets.map((pet) =>
+                    <PetCard key={pet.id} {...pet} />
+                )}
+            </div>
         </div>
     );
 }
