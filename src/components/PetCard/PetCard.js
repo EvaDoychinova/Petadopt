@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Card, CardBody, CardTitle, CardSubtitle, CardText, CardImg } from 'reactstrap';
 
-import { Card, CardBody, CardTitle, CardSubtitle, CardText, CardImg, Button } from 'reactstrap';
+import ButtonLink from '../Shared/ButtonLink';
 
 import './PetCard.css';
 
@@ -17,7 +17,7 @@ const PetCard = (pet) => {
             </div>
             <CardBody className="text-center">
                 <CardText>{pet.description}</CardText>
-                <Button color="info"><Link to={`/pets/${pet.id}`} className="card-link">Details</Link></Button>
+                <ButtonLink color="info" to={`/pets/${pet.id}`}>Details</ButtonLink>
             </CardBody>
         </Card>
     );

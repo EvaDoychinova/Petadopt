@@ -21,7 +21,7 @@ const Register = () => {
                     <Input type="rePassword" name="rePassword" id="rePassword" />
                 </FormGroup>
                 <FormGroup className="text-center m-0 pt-2">
-                    <Button color="info" className="">Register</Button>
+                    <Button color="info">Register</Button>
                 </FormGroup>
             </Form>
         </div>

@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import { ListGroup, ListGroupItem, Button } from 'reactstrap';
 
+import ButtonLink from '../Shared/ButtonLink';
 import firebase from '../../firebase';
 
 import './PetDetails.css';
 
 const Pet = ({
     match,
-    history,
+    // history,
 }) => {
     const petId = match.params.petId;
     console.log(petId);
@@ -26,18 +28,19 @@ const Pet = ({
         })
     }, [petId]);
 
-    const adoptPetHandler=()=>{
+    const adoptPetHandler = () => {
         console.log(pet);
         console.log(pet.wantToAdopt);
-        const updatedPet={...pet, wantToAdopt:true};
+        const updatedPet = { ...pet, wantToAdopt: true };
         console.log(updatedPet);
         // setPet(oldPet =>({...oldPet, wantToAdopt: true}));
 
-        firebase.database().ref('pets/'+ pet.id).update(updatedPet);
-        history.push('/pets');
+        firebase.database().ref('pets/' + pet.id).update(updatedPet);
+        // history.push('/pets');
+        return <Redirect to="/pets"/>
     };
 
-    const fosterPetHandler=()=>{
+    const fosterPetHandler = () => {
 
     };
 
@@ -56,7 +59,8 @@ const Pet = ({
             </ListGroup>
             <div className="text-center">
                 <Button color="info" className="mr-3" onClick={adoptPetHandler}>Adopt</Button>
-                <Button color="info" className="ml-3" onClick={fosterPetHandler}>Foster Care</Button>
+                <Button color="info" className="ml-3 mr-3" onClick={fosterPetHandler}>Foster Care</Button>
+                <ButtonLink color="secondary" to="/pets" className="ml-3">Back to Pets</ButtonLink>
             </div>
         </div>
     );

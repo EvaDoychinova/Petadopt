@@ -17,7 +17,7 @@ const Login = () => {
                     <Input type="password" name="password" id="password" />
                 </FormGroup>
                 <FormGroup className="text-center m-0 pt-2">
-                    <Button color="info" className="text-center">Login</Button>
+                    <Button color="info">Login</Button>
                 </FormGroup>
             </Form>
         </div>

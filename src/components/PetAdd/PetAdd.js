@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-
-import firebase from '../../firebase';
+import { Redirect } from 'react-router-dom';
 
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
+import ButtonLink from '../Shared/ButtonLink';
+import firebase from '../../firebase';
+
 import './PetAdd.css';
 
-const PetAdd = ({
-    history
-}) => {
+const PetAdd = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
@@ -37,14 +37,11 @@ const PetAdd = ({
             gender: gender.value,
             description: description.value,
             isAdopted: false,
-            wantToAdopt:false,
+            wantToAdopt: false,
         }
-        let newPetKey=firebase.database().ref('pets').push(newPet).key;
+        let newPetKey = firebase.database().ref('pets').push(newPet).key;
         console.log(newPetKey);
-        history.push(`/pets/${newPetKey}`);
-
-        // firebase.database().ref('pets').push(newPet);
-        // history.push('/pets');
+        return <Redirect to={`/pets/${newPetKey}`} />;
     };
 
     return (
@@ -60,7 +57,6 @@ const PetAdd = ({
                     <Label htmlFor="imageUrl">ImageUrl</Label>
                     <Input type="url" id="imageUrl" name="imageUrl" className="form-control-sm" />
                 </FormGroup>
-
                 <FormGroup>
                     <Label htmlFor="category">Category</Label>
                     <Input type="select" name="category" id="category" className="form-control-sm">
@@ -99,7 +95,8 @@ const PetAdd = ({
                     <Input type="textarea" id="description" name="description" className="form-control-sm" />
                 </FormGroup>
                 <FormGroup className="text-center m-0">
-                    <Button type="submit" color="info">Add a pet</Button>
+                    <Button type="submit" color="info" className="mr-3">Add a pet</Button>
+                    <ButtonLink color="secondary" to="/pets">Back to Pets</ButtonLink>
                 </FormGroup>
             </Form>
         </div>

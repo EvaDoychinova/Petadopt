@@ -26,12 +26,3 @@
     left:50%;
     transform: translate(-50%,-50%);
 }
-
-.card-link{
-    color: white;
-}
-
-.card-link:hover{
-    color: white;
-    text-decoration: none;;
-}
