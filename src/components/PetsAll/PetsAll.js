@@ -21,15 +21,19 @@ const PetsAll = () => {
         const dbPets = firebase.database().ref('pets/');
 
         dbPets.on('value', (res) => {
-            const correctPetsFormat = Object.entries(res.val()).map(([id, value]) => { return { ...value, id: id } });
+            console.log(res.val());
+            const correctPetsFormat = Object.entries(res.val()).map(([id, value]) => { return { ...value, id: id } })
+                .filter(x => x.isAdopted === false)
+                .sort((a, b) => a['age'] - b['age']);
+            console.log(correctPetsFormat);
             setPets(correctPetsFormat);
         })
     }, []);
 
     return (
-        <div className="pets-all-page-content text-center">
-            <h1 className="text-center pb-5">Pets All Page</h1>
-            <div className="pet-cards-container row row-cols-1 row-cols-md-2 row-cols-lg-3">
+        <div className="main-content pets-all-page-content text-center">
+            <h1 className="text-center pb-5">The Pets</h1>
+            <div className="pet-cards-container row">
                 {pets.map((pet) =>
                     <PetCard key={pet.id} {...pet} />
                 )}

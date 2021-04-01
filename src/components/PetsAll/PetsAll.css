@@ -2,11 +2,14 @@
     min-width:100%;
     width: min-content;
     max-width: 90vw;
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
 }
 
 @media(min-width:768px){
     .pets-all-page-content{
-        width: max-content;
+        width:100%;
     }
 }
 

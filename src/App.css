@@ -12,8 +12,9 @@ body{
 }
 
 .main-container{
+  position: relative;
   display: flex;
-  flex: 1 0 auto;
+  flex: 1 1 auto;
   padding: 15px 30px;
   background-image: url('https://cdn.wallpapersafari.com/8/93/lRDa6m.jpg');
   background-repeat: no-repeat;
@@ -24,8 +25,8 @@ body{
 	background-color: #FFF;
 	border-radius: 15px;
 	padding: 25px;
-	margin:0;
 	min-width:260px;
+  height: min-content;
 	box-shadow: 0 0 4px rgb(0 0 0 / 60%);
 	flex: 0 1 auto;
 }

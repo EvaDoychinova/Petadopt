@@ -9,7 +9,7 @@ const PetCard = (pet) => {
         <Card className="pet-card">
             <CardBody className="text-center">
                 <CardTitle tag="h5">{pet.name}</CardTitle>
-                <CardSubtitle tag="h6" className="mb-2 text-muted">Age: {pet.age}</CardSubtitle>
+                <CardSubtitle tag="h6" className="mb-2 text-muted">Age: {pet.age} years</CardSubtitle>
                 <CardSubtitle tag="h6" className="mb-2 text-muted">Gender: {pet.gender}</CardSubtitle>
             </CardBody>
             <div className="img-container">

@@ -1,36 +1,56 @@
+import { useState, useEffect } from 'react';
+
+import firebase from '../../firebase';
+
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 import './PetAdd.css';
 
-const PetAdd = () => {
-    const categories = [
-        {
-            "id": 1,
-            "name": "Dog"
-        },
-        {
-            "id": 2,
-            "name": "Cat"
-        },
-        {
-            "id": 3,
-            "name": "Rabbit"
-        },
-        {
-            "id": 4,
-            "name": "Hamster"
-        },
-        {
-            "id": 5,
-            "name": "Guinee pig"
-        },
-    ];
+const PetAdd = ({
+    history
+}) => {
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const dbCategories = firebase.database().ref('categories/');
+
+        dbCategories.on('value', (res) => {
+            console.log(res.val());
+            const correctCategoriesFormat = Object.entries(res.val()).map(([id, value]) => { return { ...value, id: id } })
+                .sort((a, b) => a['name'].localeCompare(b['name']));;
+            console.log(correctCategoriesFormat);
+            setCategories(correctCategoriesFormat);
+        });
+    }, []);
+
+    const onAddPetSubmitHandler = (e) => {
+        e.preventDefault();
+        console.log(e);
+        const { name, imageUrl, category, age, weight, gender, description } = e.target;
+
+        var newPet = {
+            name: name.value,
+            imageUrl: imageUrl.value,
+            category: category.value,
+            age: Number(age.value),
+            weight: Number(weight.value),
+            gender: gender.value,
+            description: description.value,
+            isAdopted: false,
+        }
+        let newPetKey=firebase.database().ref('pets').push(newPet).key;
+        console.log(newPetKey);
+        history.push(`/pets/${newPetKey}`);
+
+        // firebase.database().ref('pets').push(newPet);
+        // history.push('/pets');
+    };
 
     return (
-        <div className="pet-add-form-content">
+        <div className="main-content pet-add-form-content">
             <h2 className="text-center">Add a Pet</h2>
 
-            <Form className="m-auto">
+            <Form onSubmit={onAddPetSubmitHandler} className="m-auto">
                 <FormGroup>
                     <Label htmlFor="name">Name</Label>
                     <Input type="text" id="name" name="name" className="form-control-sm" />
@@ -44,7 +64,7 @@ const PetAdd = () => {
                     <Label htmlFor="category">Category</Label>
                     <Input type="select" name="category" id="category" className="form-control-sm">
                         {categories.map(x =>
-                            <option key={x.id} value={x.id}>{x.name}</option>
+                            <option key={x.id} value={x.name}>{x.name}</option>
                         )}
                     </Input>
                 </FormGroup>
@@ -55,20 +75,20 @@ const PetAdd = () => {
                     </FormGroup>
                     <FormGroup className="col-6">
                         <Label htmlFor="weight">Weight</Label>
-                        <Input type="number" id="weight" name="weight" className="form-control-sm" />
+                        <Input type="number" step="any" id="weight" name="weight" className="form-control-sm" />
                     </FormGroup>
                 </div>
                 <FormGroup className="row col-md-8 col-lg-6 justify-content-between m-0 p-0">
-                    <Label className="">Sex:</Label>
+                    <Label className="">Gender:</Label>
                     <FormGroup check>
                         <Label check>
-                            <Input type="radio" name="sex" />{' '}
+                            <Input type="radio" name="gender" value="male" />{' '}
                             Male
                         </Label>
                     </FormGroup>
                     <FormGroup check>
                         <Label check>
-                            <Input type="radio" name="sex" />{' '}
+                            <Input type="radio" name="gender" value="female" />{' '}
                             Female
                         </Label>
                     </FormGroup>
@@ -77,10 +97,10 @@ const PetAdd = () => {
                     <Label htmlFor="description">Description</Label>
                     <Input type="textarea" id="description" name="description" className="form-control-sm" />
                 </FormGroup>
+                <FormGroup className="text-center m-0">
+                    <Button type="submit" color="info">Add a pet</Button>
+                </FormGroup>
             </Form>
-            <FormGroup className="text-center m-0">
-                <Button color="info">Add a pet</Button>
-            </FormGroup>
         </div>
     );
 }

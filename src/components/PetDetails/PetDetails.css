@@ -1,0 +1,10 @@
+.pet-details-page-content{
+    position: relative;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+.details-img-wrapper{
+    
+}

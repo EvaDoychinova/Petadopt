@@ -1,0 +1,15 @@
+.home-page-content.main-content{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 15px;
+}
+
+.home-link{
+    color: white;
+}
+
+.home-link:hover{
+    color: white;
+    text-decoration: none;
+}

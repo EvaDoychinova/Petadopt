@@ -19,7 +19,7 @@ const App = () => {
 		<div className="body-container">
 			<Header />
 			<div className="main-container">
-				<div className="main-content m-auto">
+				{/* <div className="main-content"> */}
 					<Switch>
 						<Route path="/" exact component={Home} />
 						<Route path="/about" exact component={About} />
@@ -29,11 +29,11 @@ const App = () => {
 						<Route path="/login" exact component={Login} />
 						<Route path="/pets" exact component={PetsAll} />
 						<Route path="/pets/add" component={PetAdd} />
-						<Route path="/pets/:id" component={PetDetails} />
+						<Route path="/pets/:petId" component={PetDetails} />
 
 						<Route component={Error} />
 					</Switch>
-				</div>
+				{/* </div> */}
 			</div>
 			<Footer />
 		</div>
