@@ -37,6 +37,7 @@ const PetAdd = ({
             gender: gender.value,
             description: description.value,
             isAdopted: false,
+            wantToAdopt:false,
         }
         let newPetKey=firebase.database().ref('pets').push(newPet).key;
         console.log(newPetKey);

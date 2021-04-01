@@ -23,7 +23,7 @@ const PetsAll = () => {
         dbPets.on('value', (res) => {
             console.log(res.val());
             const correctPetsFormat = Object.entries(res.val()).map(([id, value]) => { return { ...value, id: id } })
-                .filter(x => x.isAdopted === false)
+                .filter(x => x.wantToAdopt === false)
                 .sort((a, b) => a['age'] - b['age']);
             console.log(correctPetsFormat);
             setPets(correctPetsFormat);

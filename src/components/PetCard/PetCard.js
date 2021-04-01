@@ -17,8 +17,7 @@ const PetCard = (pet) => {
             </div>
             <CardBody className="text-center">
                 <CardText>{pet.description}</CardText>
-                <Button color="info" className="mr-3"><Link to={`/pets/${pet.id}`} className="card-link">Details</Link></Button>
-                <Button color="info" className="ml-3"><Link to={`/donate/${pet.id}`} className="card-link">Donate</Link></Button>
+                <Button color="info"><Link to={`/pets/${pet.id}`} className="card-link">Details</Link></Button>
             </CardBody>
         </Card>
     );
