@@ -11,6 +11,8 @@ import Login from './components/Login';
 import PetAdd from './components/PetAdd';
 import PetsAll from './components/PetsAll';
 import PetDetails from './components/PetDetails';
+import PetDelete from './components/PetDelete';
+import PetEdit from './components/PetEdit';
 import PetsForAdoption from './components/PetsForAdoption';
 import PetForAdoptionDetails from './components/PetForAdoptionDetails';
 
@@ -33,6 +35,8 @@ const App = () => {
 						<Route path="/pets/add" exact component={PetAdd} />
 						<Route path="/pets/adoption" exact component={PetsForAdoption} />
 						
+						<Route path="/pets/edit/:petId" component={PetEdit} />
+						<Route path="/pets/delete/:petId" component={PetDelete} />
 						<Route path="/pets/adoption/:petId" component={PetForAdoptionDetails} />
 						<Route path="/pets/:petId" component={PetDetails} />
 

@@ -20,7 +20,7 @@ const PetsForAdoption = () => {
     }, []);
 
     return (
-        <PetsList title="The Pets" pets={pets} to='/pets/adoption'/>
+        <PetsList title="Pets for Adoption" pets={pets} to='/pets/adoption'/>
     );
 };
 

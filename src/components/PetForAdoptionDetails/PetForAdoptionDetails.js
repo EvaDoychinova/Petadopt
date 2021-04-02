@@ -1,11 +1,11 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
 import firebase from '../../firebase';
 import PetData from '../Shared/PetData';
 
 import './PetForAdoptionDetails.css';
 
-const PetForAdoptionDetails=({
+const PetForAdoptionDetails = ({
     match,
     history,
 }) => {
@@ -30,7 +30,7 @@ const PetForAdoptionDetails=({
         console.log(pet.isAdopted);
         const updatedPet = { ...pet, isAdopted: true };
         console.log(updatedPet);
-        // setPet(oldPet =>({...oldPet, wantToAdopt: true}));
+        // setPet(oldPet => ({ ...oldPet, isAdopted: true }));
 
         firebase.database().ref('pets/' + pet.id).update(updatedPet);
         history.push('/pets/adoption');
@@ -38,12 +38,13 @@ const PetForAdoptionDetails=({
 
     const unadoptPetHandler = () => {
         console.log(pet.wantToAdopt);
-        const updatedPet={...pet, wantToAdopt:false};
+        const updatedPet = { ...pet, wantToAdopt: false };
         console.log(updatedPet);
+        // setPet(oldPet => ({ ...oldPet, wantToAdopt: false }));
 
-        firebase.database().ref('/pets'+pet.id).update(updatedPet);
+        firebase.database().ref('/pets/' + pet.id).update(updatedPet);
         history.push('/pets/adoption');
-    }
+    };
 
     return (
         <PetData
@@ -52,7 +53,9 @@ const PetForAdoptionDetails=({
             button1Title="Adopted"
             button2Handler={unadoptPetHandler}
             button2Title="Unadopt"
-            backLink="/pets/adoption" />
+            backButtonLink="/pets/adoption"
+            editLink={`/pets/edit/${pet.id}`}
+            deleteLink={`/pets/delete/${pet.id}`} />
     );
 };
 

@@ -35,18 +35,14 @@ const Pet = ({
         history.push('/pets');
     };
 
-    // const fosterHandler=()=>{
-
-    // };
-
     return (
         <PetData
             pet={pet}
             button1Handler={adoptPetHandler}
             button1Title="Adopt"
-            // button2Handler={fosterHandler}
-            // button2Title="Foster care"
-            backLink="/pets" />
+            backButtonLink="/pets"
+            editLink={`/pets/edit/${pet.id}`}
+            deleteLink={`/pets/delete/${pet.id}`} />
     );
 }
 

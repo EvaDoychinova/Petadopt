@@ -12,9 +12,7 @@ const PetAdd = ({
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        const dbCategories = firebase.database().ref('categories/');
-
-        dbCategories.on('value', (res) => {
+        firebase.database().ref('categories/').once('value').then((res) => {
             console.log(res.val());
             const correctCategoriesFormat = Object.entries(res.val()).map(([id, value]) => { return { ...value, id: id } })
                 .sort((a, b) => a['name'].localeCompare(b['name']));;
@@ -101,6 +99,6 @@ const PetAdd = ({
             </Form>
         </div>
     );
-}
+};
 
 export default PetAdd;

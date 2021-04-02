@@ -10,7 +10,9 @@ const PetData = ({
     button1Title,
     button2Handler,
     button2Title,
-    backLink,
+    backButtonLink,
+    editLink,
+    deleteLink,
 }) => {
     return (
         <div className="main-content pet-details-page-content">
@@ -24,13 +26,24 @@ const PetData = ({
                 <ListGroupItem><b>Weight:</b> {pet.weight} kg</ListGroupItem>
                 <ListGroupItem><b>Category:</b> {pet.category}</ListGroupItem>
                 <ListGroupItem className="text-break sm"><b>About me:</b> {pet.description}</ListGroupItem>
+                {(pet.adopter) ?
+                    <ListGroupItem>Adopter: {pet.adopter}</ListGroupItem> :
+                    null}
             </ListGroup>
-            <div className="text-center">
-                <Button color="info" className="mr-3" onClick={button1Handler}>{button1Title}</Button>
-                {( button2Handler&& button2Title)
-                ?<Button color="info" className="ml-3 mr-3" onClick={button2Handler}>{button2Title}</Button>
-                :null}
-                <ButtonLink color="secondary" to={backLink} className="ml-3">Back to Pets</ButtonLink>
+            <div className="row pt-2">
+                <Button color="info" className="col ml-3 mr-3" onClick={button1Handler}>{button1Title}</Button>
+                {(button2Handler && button2Title) ?
+                    <Button color="info" className="col ml-3 mr-3" onClick={button2Handler}>{button2Title}</Button> :
+                    null}
+                <ButtonLink color="secondary" to={backButtonLink} className="col ml-3 mr-3">Back to Pets</ButtonLink>
+            </div>
+            <div className="row pt-4">
+                {(editLink) ?
+                    <ButtonLink color="info" to={editLink} className="col ml-3 mr-3">Edit</ButtonLink> :
+                    null}
+                {(deleteLink) ?
+                    <ButtonLink color="danger" to={deleteLink} className="col ml-3 mr-3">Delete</ButtonLink> :
+                    null}
             </div>
         </div>
     );
