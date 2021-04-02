@@ -8,9 +8,10 @@ const ButtonLink = ({
     children,
     to,
     color,
+    className,
 }) => {
     return (
-        <Button color={color} className="ml-3"><Link to={to} className="button-link">{children}</Link></Button>
+        <Button color={color} className={className}><Link to={to} className="button-link">{children}</Link></Button>
     );
 };
 

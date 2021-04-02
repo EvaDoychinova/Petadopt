@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import firebase from '../../firebase';
-
-import PetCard from '../PetCard';
+import PetsList from '../Shared/PetsList';
 
 import './PetsAll.css';
 
@@ -18,27 +17,29 @@ const PetsAll = () => {
     const [pets, setPets] = useState([]);
 
     useEffect(() => {
-        const dbPets = firebase.database().ref('pets/');
+        // const dbPets = firebase.database().ref('pets/');
 
-        dbPets.on('value', (res) => {
+        // dbPets.on('value', (res) => {
+        //     console.log(res.val());
+        //     const correctPetsFormat = Object.entries(res.val()).map(([id, value]) => { return { ...value, id: id } })
+        //         .filter(x => x.wantToAdopt === false)
+        //         .sort((a, b) => a['age'] - b['age']);
+        //     console.log(correctPetsFormat);
+        //     setPets(correctPetsFormat);
+        // });
+
+        firebase.database().ref('pets/').once('value').then((res) => {
             console.log(res.val());
             const correctPetsFormat = Object.entries(res.val()).map(([id, value]) => { return { ...value, id: id } })
                 .filter(x => x.wantToAdopt === false)
                 .sort((a, b) => a['age'] - b['age']);
             console.log(correctPetsFormat);
             setPets(correctPetsFormat);
-        })
+        });
     }, []);
 
     return (
-        <div className="main-content pets-all-page-content text-center">
-            <h1 className="text-center pb-5">The Pets</h1>
-            <div className="pet-cards-container row">
-                {pets.map((pet) =>
-                    <PetCard key={pet.id} {...pet} />
-                )}
-            </div>
-        </div>
+        <PetsList title="The Pets" pets={pets} to='/pets' />
     );
 }
 

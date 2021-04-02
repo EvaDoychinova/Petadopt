@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
-
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 import ButtonLink from '../Shared/ButtonLink';
@@ -8,7 +6,9 @@ import firebase from '../../firebase';
 
 import './PetAdd.css';
 
-const PetAdd = () => {
+const PetAdd = ({
+    history,
+}) => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
@@ -41,7 +41,7 @@ const PetAdd = () => {
         }
         let newPetKey = firebase.database().ref('pets').push(newPet).key;
         console.log(newPetKey);
-        return <Redirect to={`/pets/${newPetKey}`} />;
+        history.push(`/pets/${newPetKey}`);
     };
 
     return (
@@ -96,7 +96,7 @@ const PetAdd = () => {
                 </FormGroup>
                 <FormGroup className="text-center m-0">
                     <Button type="submit" color="info" className="mr-3">Add a pet</Button>
-                    <ButtonLink color="secondary" to="/pets">Back to Pets</ButtonLink>
+                    <ButtonLink color="secondary" to="/pets" className="ml-3">Back to Pets</ButtonLink>
                 </FormGroup>
             </Form>
         </div>

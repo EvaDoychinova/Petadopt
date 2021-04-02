@@ -1,0 +1,23 @@
+.pets-list-page-content{
+    min-width:100%;
+    width: min-content;
+    max-width: 90vw;
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+@media(min-width:768px){
+    .pets-list-page-content{
+        width:100%;
+    }
+}
+
+.pet-cards-container.row{
+    width:100%;
+    grid-column-gap: 25px;
+    grid-row-gap: 25px;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}

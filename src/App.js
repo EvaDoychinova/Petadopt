@@ -8,9 +8,11 @@ import Privacy from './components/Privacy';
 import Contacts from './components/Contacts';
 import Register from './components/Register';
 import Login from './components/Login';
+import PetAdd from './components/PetAdd';
 import PetsAll from './components/PetsAll';
 import PetDetails from './components/PetDetails';
-import PetAdd from './components/PetAdd';
+import PetsForAdoption from './components/PetsForAdoption';
+import PetForAdoptionDetails from './components/PetForAdoptionDetails';
 
 import './App.css';
 
@@ -28,7 +30,10 @@ const App = () => {
 						<Route path="/register" exact component={Register} />
 						<Route path="/login" exact component={Login} />
 						<Route path="/pets" exact component={PetsAll} />
-						<Route path="/pets/add" component={PetAdd} />
+						<Route path="/pets/add" exact component={PetAdd} />
+						<Route path="/pets/adoption" exact component={PetsForAdoption} />
+						
+						<Route path="/pets/adoption/:petId" component={PetForAdoptionDetails} />
 						<Route path="/pets/:petId" component={PetDetails} />
 
 						<Route component={Error} />

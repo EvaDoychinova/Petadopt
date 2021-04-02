@@ -4,7 +4,10 @@ import ButtonLink from '../Shared/ButtonLink';
 
 import './PetCard.css';
 
-const PetCard = (pet) => {
+const PetCard = ({
+    pet,
+    link,
+}) => {
     return (
         <Card className="pet-card">
             <CardBody className="text-center">
@@ -17,7 +20,7 @@ const PetCard = (pet) => {
             </div>
             <CardBody className="text-center">
                 <CardText>{pet.description}</CardText>
-                <ButtonLink color="info" to={`/pets/${pet.id}`}>Details</ButtonLink>
+                <ButtonLink color="info" to={`${link}/${pet.id}`} >Details</ButtonLink>
             </CardBody>
         </Card>
     );
