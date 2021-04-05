@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-import firebase from '../../firebase';
 import PetData from '../Shared/PetData';
+import firebase from '../../config/firebase';
 
 import './PetForAdoptionDetails.css';
 

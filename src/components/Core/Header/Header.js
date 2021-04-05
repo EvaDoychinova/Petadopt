@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { DropdownItem, Dropdown, DropdownToggle, DropdownMenu } from 'reactstrap';
 
-import MenuBars from '../../svg/bars-solid.svg';
+import MenuBars from '../../../svg/bars-solid.svg';
 
 import './Header.css';
 

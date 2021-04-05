@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 import ButtonLink from '../Shared/ButtonLink';
-import firebase from '../../firebase';
+import firebase from '../../config/firebase';
 
 import './PetAdd.css';
 

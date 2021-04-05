@@ -1,12 +1,12 @@
 import { Card, CardBody, CardTitle, CardSubtitle, CardText, CardImg } from 'reactstrap';
 
-import ButtonLink from '../Shared/ButtonLink';
+import ButtonLink from '../ButtonLink';
 
 import './PetCard.css';
 
 const PetCard = ({
     pet,
-    link,
+    baseDetailsLink,
 }) => {
     return (
         <Card className="pet-card">
@@ -20,7 +20,7 @@ const PetCard = ({
             </div>
             <CardBody className="text-center">
                 <CardText>{pet.description}</CardText>
-                <ButtonLink color="info" to={`${link}/${pet.id}`} >Details</ButtonLink>
+                <ButtonLink color="info" to={`${baseDetailsLink}/${pet.id}`} >Details</ButtonLink>
             </CardBody>
         </Card>
     );

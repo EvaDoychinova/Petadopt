@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ListGroup, ListGroupItem, Button } from 'reactstrap';
 
 import ButtonLink from '../Shared/ButtonLink';
-import firebase from '../../firebase';
+import firebase from '../../config/firebase';
 
 import './PetDelete.css';
 
@@ -42,7 +42,7 @@ const PetDelete = ({
             </ListGroup>
             <div className="row pt-2">
                 <Button color="danger" className="col ml-3 mr-3" onClick={deleteHandler}>Delete</Button>
-                <ButtonLink color="secondary" to={`/pets/details/${pet.id}`} className="col ml-3 mr-3">Back to Details</ButtonLink>
+                <ButtonLink color="secondary" to={`/pets/${pet.id}`} className="col ml-3 mr-3">Back to Details</ButtonLink>
             </div>
         </div>
     );

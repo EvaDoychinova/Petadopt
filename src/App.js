@@ -1,13 +1,13 @@
 import { Switch, Route } from 'react-router-dom';
 
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './components/Home';
-import About from './components/About';
-import Privacy from './components/Privacy';
-import Contacts from './components/Contacts';
-import Register from './components/Register';
-import Login from './components/Login';
+import Header from './components/Core/Header';
+import Footer from './components/Core/Footer';
+import Home from './components/Core/Home';
+import About from './components/Core/About';
+import Privacy from './components/Core/Privacy';
+import Contacts from './components/Core/Contacts';
+import Register from './components/Core/Register';
+import Login from './components/Core/Login';
 import PetAdd from './components/PetAdd';
 import PetsAll from './components/PetsAll';
 import PetDetails from './components/PetDetails';

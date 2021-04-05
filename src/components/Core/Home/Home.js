@@ -1,4 +1,4 @@
-import ButtonLink from '../Shared/ButtonLink';
+import ButtonLink from '../../Shared/ButtonLink';
 
 import './Home.css';
 
