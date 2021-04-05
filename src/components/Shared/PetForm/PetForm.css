@@ -1,4 +1,4 @@
-.pet-edit-form-content{
+.pet-form-content{
     min-width:260px;
 	width:50vw;
 	position: relative;
@@ -8,13 +8,13 @@
 }
 
 @media(min-width:576px){
-	.pet-edit-form-content{
+	.pet-form-content{
 		width:400px;
 	}
 }
 
 @media(min-width:768px){
-	.pet-edit-form-content{
+	.pet-form-content{
 		width:500px;
 	}
 }

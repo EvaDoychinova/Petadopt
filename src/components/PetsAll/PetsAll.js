@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react';
 import PetsList from '../Shared/PetsList';
 import firebase from '../../config/firebase';
 
-import './PetsAll.css';
-
 const PetsAll = () => {
     // useEffect(()=>{
     //     console.log('useEffect-Fetch');

@@ -3,8 +3,6 @@ import {useState, useEffect} from 'react';
 import PetsList from '../Shared/PetsList';
 import firebase from '../../config/firebase';
 
-import './PetsForAdoption.css';
-
 const PetsForAdoption = () => {
     const [pets, setPets] = useState([]);
 
