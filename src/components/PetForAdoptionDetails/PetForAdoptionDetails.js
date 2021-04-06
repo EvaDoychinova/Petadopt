@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react';
 import PetData from '../Shared/PetData';
 import firebase from '../../config/firebase';
 
-import './PetForAdoptionDetails.css';
-
 const PetForAdoptionDetails = ({
     match,
     history,

@@ -1,8 +1,6 @@
 import PetForm from '../Shared/PetForm';
 import firebase from '../../config/firebase';
 
-import './PetEdit.css';
-
 const PetEdit = ({
     match,
     history,

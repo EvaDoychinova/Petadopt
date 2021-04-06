@@ -1,8 +1,6 @@
 import PetForm from '../Shared/PetForm/PetForm';
 import firebase from '../../config/firebase';
 
-import './PetAdd.css';
-
 const PetAdd = ({
     history,
 }) => {

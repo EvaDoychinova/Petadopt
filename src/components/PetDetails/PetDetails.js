@@ -27,7 +27,6 @@ const Pet = ({
         console.log(pet.wantToAdopt);
         const updatedPet = { ...pet, wantToAdopt: true };
         console.log(updatedPet);
-        // setPet(oldPet =>({...oldPet, wantToAdopt: true}));
 
         firebase.database().ref('pets/' + pet.id).update(updatedPet);
         history.push('/pets');
