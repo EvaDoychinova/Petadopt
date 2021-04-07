@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 import UserContext from '../../../contexts/UserContext';
@@ -6,43 +7,37 @@ import firebase from '../../../config/firebase';
 
 import './Register.css';
 
-const Register = ({
-    history,
-}) => {
+const Register = () => {
     const [user, setUser] = useContext(UserContext);
+    const history = useHistory({});
 
     const onRegisterSubmitHandler = (e) => {
         e.preventDefault();
-        console.log(e.target);
 
         let email = e.target.email.value;
         let password = e.target.password.value;
         // let phoneNumber=e.target.phoneNumber.value;
-        let displayName=e.target.displayName.value;
-
-        console.log(email);
-        console.log(password);
+        let displayName = e.target.displayName.value;
 
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
-                console.log(userCredential);
                 let currentUser = userCredential.user;
-                console.log(currentUser);
 
                 currentUser.updateProfile({
                     displayName: displayName,
                 })
-                .then(()=>{
-                    setUser(currentUser);
-                    console.log("User profile updated!");
-                })
-                .catch((error) => {
-                    console.log(error);
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-    
-                    history.push('/error');
-                });
+                    .then(() => {
+                        setUser(currentUser);
+                        history.push('/');
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        console.log(errorCode);
+                        console.log(errorMessage);
+                        history.push('/error');
+                    });
 
                 // currentUser.linkWithPhoneNumber(phoneNumber)
                 // .then(()=>{
@@ -53,21 +48,16 @@ const Register = ({
                 //     console.log(error);
                 //     var errorCode = error.code;
                 //     var errorMessage = error.message;
-    
+
                 //     history.push('/error');
                 // });
-
-                let userAuth = firebase.auth().currentUser;
-                console.log(userAuth);
-
-                setUser(user);
-                history.push('/');
             })
             .catch((error) => {
                 console.log(error);
                 var errorCode = error.code;
                 var errorMessage = error.message;
-
+                console.log(errorCode);
+                console.log(errorMessage);
                 history.push('/error');
             });
     };

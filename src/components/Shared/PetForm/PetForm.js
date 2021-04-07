@@ -10,8 +10,8 @@ const PetForm = ({
     petId,
     pageTitle,
     submitButtonTitle,
-    backButtonTitle,
     backButtonLink,
+    backButtonTitle,
     onFormSubmitHandler,
 }) => {
     const [pet, setPet] = useState({});
@@ -59,7 +59,7 @@ const PetForm = ({
         setPet(updatedPet);
     };
 
-    const formSubmitHandler=(e)=>{
+    const formSubmitHandler = (e) => {
         e.preventDefault();
         console.log(e.target);
 
@@ -67,7 +67,7 @@ const PetForm = ({
     };
 
     return (
-        <div className="main-content pet-edit-form-content">
+        <div className="main-content pet-form-content">
             <h2 className="text-center">{pageTitle}</h2>
             <Form onSubmit={formSubmitHandler} className="m-auto">
                 <FormGroup>
@@ -167,7 +167,12 @@ const PetForm = ({
                 </FormGroup>
                 <FormGroup className="text-center m-0">
                     <Button type="submit" color="info" className="mr-3">{submitButtonTitle}</Button>
-                    <ButtonLink color="secondary" to={backButtonLink} className="ml-3">{backButtonTitle}</ButtonLink>
+                    <ButtonLink
+                        color="secondary"
+                        to={(pet?.adopter ? '/pets/adoption' : '/pets') + (backButtonLink ? backButtonLink : '')}
+                        className="ml-3">
+                        {backButtonTitle}
+                    </ButtonLink>
                 </FormGroup>
             </Form>
         </div>

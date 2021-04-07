@@ -1,42 +1,34 @@
 import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
-import UserContext from '../../../contexts/UserContext';
 import firebase from '../../../config/firebase';
+import UserContext from '../../../contexts/UserContext';
 
 import './Login.css';
 
-const Login = ({
-    history,
-}) => {
-    const [user, setUser]=useContext(UserContext);
+const Login = () => {
+    const [user, setUser] = useContext(UserContext);
+    const history = useHistory({});
 
-    const onLoginSyubmitHandler = (e) => {
+    const onLoginSubmitHandler = (e) => {
         e.preventDefault();
-        console.log(e.target);
 
         let email = e.target.email.value;
         let password = e.target.password.value;
 
-        console.log(email);
-        console.log(password);
-
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
-                let user = userCredential.user;
-                console.log(user);
-
-                let userAuth=firebase.auth().currentUser;
-                console.log(userAuth);
-                
-                setUser(user);
+                let currentUser = userCredential.user;
+                setUser(currentUser);
                 history.push('/');
             })
-            .catch((error, history) => {
+            .catch((error) => {
                 console.log(error);
                 var errorCode = error.code;
                 var errorMessage = error.message;
-
+                console.log(errorCode);
+                console.log(errorMessage);
                 history.push('/error');
             });
     };
@@ -45,7 +37,7 @@ const Login = ({
         <div className="main-content login-form-content">
             <h2 className="text-center pb-3">Login Page</h2>
 
-            <Form onSubmit={onLoginSyubmitHandler} className="m-auto">
+            <Form onSubmit={onLoginSubmitHandler} className="m-auto">
                 <FormGroup>
                     <Label htmlFor="email" color="info">Email</Label>
                     <Input type="email" name="email" id="email" className="form-control" />

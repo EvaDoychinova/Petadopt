@@ -42,7 +42,12 @@ const PetDelete = ({
             </ListGroup>
             <div className="row pt-2">
                 <Button color="danger" className="col ml-3 mr-3" onClick={deleteHandler}>Delete</Button>
-                <ButtonLink color="secondary" to={`/pets/${pet.id}`} className="col ml-3 mr-3">Back to Details</ButtonLink>
+                <ButtonLink
+                    color="secondary"
+                    to={pet.adopter ? `/pets/adoption/${pet.id}` : `/pets/${pet.id}`}
+                    className="col ml-3 mr-3">
+                    Back to Pets
+                    </ButtonLink>
             </div>
         </div>
     );

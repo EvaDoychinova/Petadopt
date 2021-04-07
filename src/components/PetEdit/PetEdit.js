@@ -19,7 +19,8 @@ const PetEdit = ({
             pageTitle={`Edit pet`}
             submitButtonTitle="Edit"
             backButtonTitle="Back to details"
-            backButtonLink={`/pets/${petId}`}
+            // backButtonLink={`/pets/${petId}`}
+            backButtonLink={`/${petId}`}
             onFormSubmitHandler={onEditPetSubmitHandler} />
     );
 };

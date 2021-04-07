@@ -11,7 +11,7 @@ const Pet = ({
     const petId = match.params.petId;
     console.log(petId);
     const [pet, setPet] = useState({});
-    const [user,setUser] = useContext(UserContext);
+    const [user, setUser] = useContext(UserContext);
 
     useEffect(() => {
         firebase.database().ref('pets/' + petId).once('value').then((res) => {
@@ -26,9 +26,13 @@ const Pet = ({
 
     const adoptPetHandler = () => {
         console.log(pet);
-        console.log(pet.wantToAdopt);
         console.log(user);
-        const updatedPet = { ...pet, wantToAdopt: true, adopter: user.uid};
+        const currentAdopter={
+            uid:user.uid,
+            email:user.email,
+            displayName:user.displayName,
+        }
+        const updatedPet = { ...pet, wantToAdopt: true, adopter: currentAdopter };
         console.log(updatedPet);
 
         firebase.database().ref('pets/' + pet.id).update(updatedPet);

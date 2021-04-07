@@ -36,7 +36,7 @@ const PetForAdoptionDetails = ({
 
     const unadoptPetHandler = () => {
         console.log(pet.wantToAdopt);
-        const updatedPet = { ...pet, wantToAdopt: false };
+        const updatedPet = { ...pet, wantToAdopt: false, adopter: null };
         console.log(updatedPet);
         // setPet(oldPet => ({ ...oldPet, wantToAdopt: false }));
 

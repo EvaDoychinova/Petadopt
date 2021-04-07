@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
+import Admin from './secrets/admin.json';
 import firebase from './config/firebase';
 import UserContext from './contexts/UserContext';
 import Header from './components/Core/Header';
@@ -38,16 +39,33 @@ const App = () => {
 						<Route path="/about" exact component={About} />
 						<Route path="/privacy" exact component={Privacy} />
 						<Route path="/contacts" exact component={Contacts} />
-						<Route path="/register" exact component={Register} />
-						<Route path="/login" exact component={Login} />
+						<Route path="/pets" exact component={PetsAll} />
+						<Route path="/pets/add" exact>
+							{
+								(user && user.uid === Admin.uid) ? <PetAdd /> : <Redirect to="/" />
+							}
+						</Route>
+						<Route path="/pets/adoption" exact>
+							{
+								(user && user.uid === Admin.uid) ? <PetsForAdoption /> : <Redirect to="/" />
+							}
+						</Route>
+						<Route path="/register" exact>
+							{
+								!user ? <Register /> : <Redirect to="/" />
+							}
+						</Route>
+						<Route path="/login" exact>
+							{
+								!user ? <Login /> : <Redirect to="/" />
+							}
+						</Route>
 						<Route path="/logout" exact render={() => {
-							firebase.auth().signOut();
+							if (user) {
+								firebase.auth().signOut();
+							}
 							return <Redirect to="/" />
 						}} />
-						<Route path="/pets" exact component={PetsAll} />
-						<Route path="/pets/add" exact component={PetAdd} />
-						<Route path="/pets/adoption" exact component={PetsForAdoption} />
-
 						<Route path="/pets/edit/:petId" component={PetEdit} />
 						<Route path="/pets/delete/:petId" component={PetDelete} />
 						<Route path="/pets/adoption/:petId" component={PetForAdoptionDetails} />
