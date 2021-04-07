@@ -1,5 +1,8 @@
-import { Switch, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
+import UserContext from './contexts/UserContext';
+import firebase from './config/firebase';
 import Header from './components/Core/Header';
 import Footer from './components/Core/Footer';
 import Home from './components/Core/Home';
@@ -19,11 +22,17 @@ import PetForAdoptionDetails from './components/PetForAdoptionDetails';
 import './App.css';
 
 const App = () => {
+	const [user, setUser] = useState();
+
+	useEffect(() => {
+		firebase.auth().onAuthStateChanged(setUser);
+	}, []);
+
 	return (
-		<div className="body-container">
-			<Header />
-			<div className="main-container">
-				{/* <div className="main-content"> */}
+		<UserContext.Provider value={[user, setUser]}>
+			<div className="body-container">
+				<Header />
+				<div className="main-container">
 					<Switch>
 						<Route path="/" exact component={Home} />
 						<Route path="/about" exact component={About} />
@@ -31,10 +40,14 @@ const App = () => {
 						<Route path="/contacts" exact component={Contacts} />
 						<Route path="/register" exact component={Register} />
 						<Route path="/login" exact component={Login} />
+						<Route path="/logout" exact render={() => {
+							firebase.auth().signOut();
+							return <Redirect to="/" />
+						}} />
 						<Route path="/pets" exact component={PetsAll} />
 						<Route path="/pets/add" exact component={PetAdd} />
 						<Route path="/pets/adoption" exact component={PetsForAdoption} />
-						
+
 						<Route path="/pets/edit/:petId" component={PetEdit} />
 						<Route path="/pets/delete/:petId" component={PetDelete} />
 						<Route path="/pets/adoption/:petId" component={PetForAdoptionDetails} />
@@ -42,10 +55,10 @@ const App = () => {
 
 						<Route component={Error} />
 					</Switch>
-				{/* </div> */}
+				</div>
+				<Footer />
 			</div>
-			<Footer />
-		</div>
+		</UserContext.Provider>
 	);
 }
 

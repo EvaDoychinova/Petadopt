@@ -1,11 +1,17 @@
+import { useContext } from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
+import UserContext from '../../../contexts/UserContext';
 import firebase from '../../../config/firebase';
 
 import './Login.css';
 
-const Login = () => {
-    const onLoginSyubmitHandler=(e)=>{
+const Login = ({
+    history,
+}) => {
+    const [user, setUser]=useContext(UserContext);
+
+    const onLoginSyubmitHandler = (e) => {
         e.preventDefault();
         console.log(e.target);
 
@@ -15,7 +21,24 @@ const Login = () => {
         console.log(username);
         console.log(password);
 
+        firebase.auth().signInWithEmailAndPassword(username, password)
+            .then((userCredential) => {
+                let user = userCredential.user;
+                console.log(user);
 
+                let userAuth=firebase.auth().currentUser;
+                console.log(userAuth);
+                
+                setUser(user);
+                history.push('/');
+            })
+            .catch((error, history) => {
+                console.log(error);
+                var errorCode = error.code;
+                var errorMessage = error.message;
+
+                history.push('/error');
+            });
     };
 
     return (

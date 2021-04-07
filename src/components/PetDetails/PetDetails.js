@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
-import PetData from '../Shared/PetData';
+import UserContext from '../../contexts/UserContext';
 import firebase from '../../config/firebase';
+import PetData from '../Shared/PetData';
 
 const Pet = ({
     match,
@@ -10,6 +11,7 @@ const Pet = ({
     const petId = match.params.petId;
     console.log(petId);
     const [pet, setPet] = useState({});
+    const [user,setUser] = useContext(UserContext);
 
     useEffect(() => {
         firebase.database().ref('pets/' + petId).once('value').then((res) => {
@@ -25,7 +27,8 @@ const Pet = ({
     const adoptPetHandler = () => {
         console.log(pet);
         console.log(pet.wantToAdopt);
-        const updatedPet = { ...pet, wantToAdopt: true };
+        console.log(user);
+        const updatedPet = { ...pet, wantToAdopt: true, adopter: user.uid};
         console.log(updatedPet);
 
         firebase.database().ref('pets/' + pet.id).update(updatedPet);

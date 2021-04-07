@@ -1,10 +1,16 @@
+import { useContext } from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
+import UserContext from '../../../contexts/UserContext';
 import firebase from '../../../config/firebase';
 
 import './Register.css';
 
-const Register = () => {
+const Register = ({
+    history,
+}) => {
+    const [user,setUser]=useContext(UserContext);
+
     const onRegisterSubmitHandler = (e) => {
         e.preventDefault();
         console.log(e.target);
@@ -17,11 +23,23 @@ const Register = () => {
 
         firebase.auth().createUserWithEmailAndPassword(username, password)
             .then((userCredential) => {
+                console.log(userCredential);
                 var user = userCredential.user;
+                console.log(user);
+                console.log(userCredential.credential);
+
+                let userAuth=firebase.auth().currentUser;
+                console.log(userAuth);
+
+                setUser(user);
+                history.push('/');
             })
             .catch((error) => {
+                console.log(error);
                 var errorCode = error.code;
                 var errorMessage = error.message;
+
+                history.push('/error');
             });
     };
 
