@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import UserContext from './contexts/UserContext';
 import firebase from './config/firebase';
+import UserContext from './contexts/UserContext';
 import Header from './components/Core/Header';
 import Footer from './components/Core/Footer';
 import Home from './components/Core/Home';

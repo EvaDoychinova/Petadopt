@@ -13,10 +13,6 @@ const Header = () => {
 
     const toggle = () => setDropdownOpen(!dropdownOpen);
 
-    useEffect(() => {
-        console.log(user);
-    }, [user]);
-
     return (
         <header className="d-flex flex-row header">
             <Link to="/" className="header-logo">PetAdopt</Link>
@@ -27,9 +23,9 @@ const Header = () => {
                     <NavLink to="/pets" className="header-link">Pets</NavLink>
                     <NavLink to="/about" className="header-link">About</NavLink>
                     <NavLink to="/contacts" className="header-link">Contacts</NavLink>
-                    {user ?
-                        <NavLink to="/logout" className="header-link">Logout</NavLink> :
-                        <>
+                    {user
+                        ? <NavLink to="/logout" className="header-link">Logout</NavLink>
+                        : <>
                             <NavLink to="/register" className="header-link">Register</NavLink>
                             <NavLink to="/login" className="header-link">Login</NavLink>
                         </>}

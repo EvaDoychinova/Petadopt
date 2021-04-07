@@ -15,5 +15,6 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+// firebase.auth().languageCode = 'bg';
 
 export default firebase;

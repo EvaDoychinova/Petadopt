@@ -15,13 +15,13 @@ const Login = ({
         e.preventDefault();
         console.log(e.target);
 
-        let username = e.target.email.value;
+        let email = e.target.email.value;
         let password = e.target.password.value;
 
-        console.log(username);
+        console.log(email);
         console.log(password);
 
-        firebase.auth().signInWithEmailAndPassword(username, password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 let user = userCredential.user;
                 console.log(user);

@@ -9,26 +9,55 @@ import './Register.css';
 const Register = ({
     history,
 }) => {
-    const [user,setUser]=useContext(UserContext);
+    const [user, setUser] = useContext(UserContext);
 
     const onRegisterSubmitHandler = (e) => {
         e.preventDefault();
         console.log(e.target);
 
-        let username = e.target.email.value;
+        let email = e.target.email.value;
         let password = e.target.password.value;
+        // let phoneNumber=e.target.phoneNumber.value;
+        let displayName=e.target.displayName.value;
 
-        console.log(username);
+        console.log(email);
         console.log(password);
 
-        firebase.auth().createUserWithEmailAndPassword(username, password)
+        firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 console.log(userCredential);
-                var user = userCredential.user;
-                console.log(user);
-                console.log(userCredential.credential);
+                let currentUser = userCredential.user;
+                console.log(currentUser);
 
-                let userAuth=firebase.auth().currentUser;
+                currentUser.updateProfile({
+                    displayName: displayName,
+                })
+                .then(()=>{
+                    setUser(currentUser);
+                    console.log("User profile updated!");
+                })
+                .catch((error) => {
+                    console.log(error);
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+    
+                    history.push('/error');
+                });
+
+                // currentUser.linkWithPhoneNumber(phoneNumber)
+                // .then(()=>{
+                //     setUser(currentUser);
+                //     console.log("Phone number updated!");
+                // })
+                // .catch((error) => {
+                //     console.log(error);
+                //     var errorCode = error.code;
+                //     var errorMessage = error.message;
+    
+                //     history.push('/error');
+                // });
+
+                let userAuth = firebase.auth().currentUser;
                 console.log(userAuth);
 
                 setUser(user);
@@ -47,6 +76,14 @@ const Register = ({
         <div className="main-content register-form-content">
             <h2 className="text-center pb-3">Register Page</h2>
             <Form onSubmit={onRegisterSubmitHandler} className="m-auto">
+                <FormGroup>
+                    <Label htmlFor="displayName">Username</Label>
+                    <Input type="text" name="displayName" id="displayName" className="form-control" />
+                </FormGroup>
+                {/* <FormGroup>
+                    <Label htmlFor="phoneNumber">Phone Number</Label>
+                    <Input type="text" name="phoneNumber" id="phoneNumber" className="form-control" />
+                </FormGroup> */}
                 <FormGroup>
                     <Label htmlFor="email">Email</Label>
                     <Input type="email" name="email" id="email" className="form-control" />
