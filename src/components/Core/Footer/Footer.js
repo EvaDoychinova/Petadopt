@@ -8,7 +8,7 @@ const Footer=()=>{
     return(
         <footer className="footer">
             <div className="container text-center">
-                &copy; {year} - PetAdopt -
+                &copy; {year} - <Link to="/" className="footer-link">PetAdopt</Link> -
                 <Link to="/privacy" className="footer-link"> Privacy</Link>
             </div>
         </footer>

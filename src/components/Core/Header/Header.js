@@ -20,7 +20,7 @@ const Header = () => {
     return (
         <header className="d-flex flex-row header">
             <Link to="/" className="header-logo">PetAdopt</Link>
-            <div className="container d-flex flex-row justify-content-end">
+            <div className="container-fluid d-flex flex-row justify-content-end">
                 <div className="screen-navigation">
                     {
                         user && user.uid === Admin.uid &&
@@ -29,19 +29,19 @@ const Header = () => {
                                 Admin
                             </DropdownToggle>
                             <DropdownMenu>
-                                <DropdownItem><NavLink to="/pets/add" className="dropdown-link">AddPet</NavLink></DropdownItem>
-                                <DropdownItem><NavLink to="/pets/adoption" className="dropdown-link">PetsForAdoption</NavLink></DropdownItem>
-                                <DropdownItem><NavLink to="/pets/adopted" className="dropdown-link">AdoptedPets</NavLink></DropdownItem>
+                                <DropdownItem><NavLink to="/pets/add" className="dropdown-link">Add New Pet</NavLink></DropdownItem>
+                                <DropdownItem><NavLink to="/pets/adoption" className="dropdown-link">Pets For Adoption</NavLink></DropdownItem>
+                                <DropdownItem><NavLink to="/pets/adopted" className="dropdown-link">Adopted Pets</NavLink></DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
                     }
-                    <NavLink to="/pets" className="header-link">Pets</NavLink>
+                    <NavLink to="/pets" className="header-link">The Pets</NavLink>
                     <NavLink to="/about" className="header-link">About</NavLink>
                     <NavLink to="/contacts" className="header-link">Contacts</NavLink>
                     {
                         user
                             ? <>
-                                <NavLink to="/pets/my" className="header-link">MyPets</NavLink>
+                                <NavLink to="/pets/my" className="header-link">My Pets</NavLink>
                                 <NavLink to="/logout" className="header-link">Logout</NavLink>
                             </>
                             : <>
@@ -60,20 +60,20 @@ const Header = () => {
                             {
                                 user && user.uid === Admin.uid &&
                                 <>
-                                    <DropdownItem><NavLink to="/pets/add" className="dropdown-link">AddPet</NavLink></DropdownItem>
-                                    <DropdownItem><NavLink to="/pets/adoption" className="dropdown-link">PetForAdoption</NavLink></DropdownItem>
-                                    <DropdownItem><NavLink to="/pets/adopted" className="dropdown-link">AdoptedPets</NavLink></DropdownItem>
+                                    <DropdownItem><NavLink to="/pets/add" className="dropdown-link">Add New Pet</NavLink></DropdownItem>
+                                    <DropdownItem><NavLink to="/pets/adoption" className="dropdown-link">Pet For Adoption</NavLink></DropdownItem>
+                                    <DropdownItem><NavLink to="/pets/adopted" className="dropdown-link">Adopted Pets</NavLink></DropdownItem>
                                     <DropdownItem divider/>
                                 </>
                             }
-                            <DropdownItem><NavLink to="/pets" className="dropdown-link">Pets</NavLink></DropdownItem>
+                            <DropdownItem><NavLink to="/pets" className="dropdown-link">The Pets</NavLink></DropdownItem>
                             <DropdownItem><NavLink to="/about" className="dropdown-link">About</NavLink></DropdownItem>
                             <DropdownItem><NavLink to="/contacts" className="dropdown-link">Contacts</NavLink></DropdownItem>
                             <DropdownItem divider/>
                             {
                                 user
                                     ? <>
-                                        <DropdownItem><NavLink to="/pets/my" className="dropdown-link">MyPets</NavLink></DropdownItem>
+                                        <DropdownItem><NavLink to="/pets/my" className="dropdown-link">My Pets</NavLink></DropdownItem>
                                         <DropdownItem><NavLink to="/logout" className="dropdown-link">Logout</NavLink></DropdownItem>
                                     </>
                                     : <>

@@ -55,14 +55,17 @@
     display:none;
 }
 
+.phone-navigation{
+    margin: auto 0;
+}
+
 @media(min-width: 768px){
     .screen-navigation{
         display:block;
     }
     
     .phone-navigation{
-        display:none;
-        margin:auto 0;
+        display: none;
     }
 }
 
