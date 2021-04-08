@@ -11,9 +11,11 @@ import './Header.css';
 
 const Header = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [dropdownPhoneMenuOpen, setDropdownPhoneMenuOpen] = useState(false);
     const [user, setUser] = useContext(UserContext);
 
     const toggle = () => setDropdownOpen(!dropdownOpen);
+    const togglePhoneMenu = () => setDropdownPhoneMenuOpen(!dropdownPhoneMenuOpen);
 
     return (
         <header className="d-flex flex-row header">
@@ -22,11 +24,16 @@ const Header = () => {
                 <div className="screen-navigation">
                     {
                         user && user.uid === Admin.uid &&
-                        <>
-                            <NavLink to="/pets/add" className="header-link">AddPet</NavLink>
-                            <NavLink to="/pets/adoption" className="header-link">PetsForAdoption</NavLink>
-                            <NavLink to="/pets/adopted" className="header-link">AdoptedPets</NavLink>
-                        </>
+                        <Dropdown isOpen={dropdownOpen} toggle={toggle} className="admin-dropdown">
+                            <DropdownToggle className="header-link d-inline" nav caret>
+                                Admin
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem><NavLink to="/pets/add" className="dropdown-link">AddPet</NavLink></DropdownItem>
+                                <DropdownItem><NavLink to="/pets/adoption" className="dropdown-link">PetsForAdoption</NavLink></DropdownItem>
+                                <DropdownItem><NavLink to="/pets/adopted" className="dropdown-link">AdoptedPets</NavLink></DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
                     }
                     <NavLink to="/pets" className="header-link">Pets</NavLink>
                     <NavLink to="/about" className="header-link">About</NavLink>
@@ -44,8 +51,8 @@ const Header = () => {
                     }
                 </div>
                 <div className="phone-navigation">
-                    <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                        <DropdownToggle className="pt-4" nav caret>
+                    <Dropdown isOpen={dropdownPhoneMenuOpen} toggle={togglePhoneMenu}>
+                        <DropdownToggle className="header-link" nav caret>
                             {/* <img src={MenuBars} alt="MenuBars" className="menu-bars" /> */}
                             <FaBars className="menu-bars" />
                         </DropdownToggle>
@@ -56,11 +63,13 @@ const Header = () => {
                                     <DropdownItem><NavLink to="/pets/add" className="dropdown-link">AddPet</NavLink></DropdownItem>
                                     <DropdownItem><NavLink to="/pets/adoption" className="dropdown-link">PetForAdoption</NavLink></DropdownItem>
                                     <DropdownItem><NavLink to="/pets/adopted" className="dropdown-link">AdoptedPets</NavLink></DropdownItem>
+                                    <DropdownItem divider/>
                                 </>
                             }
                             <DropdownItem><NavLink to="/pets" className="dropdown-link">Pets</NavLink></DropdownItem>
                             <DropdownItem><NavLink to="/about" className="dropdown-link">About</NavLink></DropdownItem>
                             <DropdownItem><NavLink to="/contacts" className="dropdown-link">Contacts</NavLink></DropdownItem>
+                            <DropdownItem divider/>
                             {
                                 user
                                     ? <>

@@ -15,10 +15,8 @@ const PetCard = ({
                 <CardSubtitle tag="h6" className="mb-2 text-muted">Gender: {pet.gender}</CardSubtitle>
                 <CardSubtitle tag="h6" className="mb-2 text-muted">Age: {pet.age} years</CardSubtitle>
                 {
-                    pet.wantToAdopt
-                        ?(pet.isAdopted
-                            ? <img src="/img/adopted-stamp.png" alt="Adopted!" className="img-adopted-stamp" />
-                            : <img src="/img/pending-round-stamp.jpg" alt="Pending-Adoption!" className="img-pending-stamp" />) 
+                    pet.isAdopted
+                        ? <img src="/img/adopted-stamp.png" alt="Adopted!" className="img-adopted-stamp" />
                         : null
                 }
             </CardBody>

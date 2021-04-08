@@ -38,6 +38,10 @@
     color:#353536;
 }
 
+.menu-bars:hover{
+    color:#0056b3;
+}
+
 .dropdown-link{
     color:#138496;
 }
@@ -58,6 +62,10 @@
     
     .phone-navigation{
         display:none;
+        margin:auto 0;
     }
 }
 
+.admin-dropdown{
+    display:inline;
+}
