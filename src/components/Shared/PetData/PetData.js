@@ -36,18 +36,23 @@ const PetData = ({
                         ? <ListGroupItem><b>Adopter:</b> {pet.adopter.displayName}</ListGroupItem>
                         : null
                 }
+                {
+                    pet.dateAdopted
+                        ? <ListGroupItem><b>Adopted on:</b> {new Date(pet.dateAdopted).toDateString()}</ListGroupItem>
+                        : null
+                }
             </ListGroup>
             <div className="row pt-2">
-                {user
+                {(user && pet.isAdopted === false)
                     ? <Button color="info" className="col ml-3 mr-3" onClick={button1Handler}>{button1Title}</Button>
                     : null}
-                {(button2Handler && button2Title) ?
-                    <Button color="info" className="col ml-3 mr-3" onClick={button2Handler}>{button2Title}</Button> :
-                    null}
+                {(button2Handler && button2Title)
+                    ? <Button color="info" className="col ml-3 mr-3" onClick={button2Handler}>{button2Title}</Button>
+                    : null}
                 <ButtonLink color="secondary" to={backButtonLink} className="col ml-3 mr-3">Back to Pets</ButtonLink>
             </div>
             {
-                user?.uid === Admin?.uid
+                user?.uid === Admin.uid
                     ? <div className="row pt-4">
                         {(editLink) ?
                             <ButtonLink color="info" to={editLink} className="col ml-3 mr-3">Edit</ButtonLink> :

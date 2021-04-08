@@ -1,34 +1,36 @@
 import { useState, useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 
-import PetData from '../Shared/PetData';
 import firebase from '../../config/firebase';
+import PetData from '../Shared/PetData';
 
-const PetForAdoptionDetails = ({
-    match,
-    history,
-}) => {
-    console.log(match);
-    const petId = match.params.petId;
-    console.log(petId);
+const PetForAdoptionDetails = () => {
     const [pet, setPet] = useState({});
+    const history = useHistory({});
+
+    const params = useParams();
+    const petId = params.petId;
 
     useEffect(() => {
-        firebase.database().ref('pets/' + petId).once('value').then((res) => {
-            console.log(res.val());
-            const data = res.val();
-            console.log(data);
-            const correctPetFormat = { ...data, id: petId };
-            console.log(correctPetFormat);
-            setPet(correctPetFormat);
-        });
-    }, [petId]);
+        firebase.database().ref('pets/' + petId).once('value')
+            .then((res) => {
+                const data = res.val();
+                const correctPetFormat = { ...data, id: petId };
+                console.log(correctPetFormat);
+                setPet(correctPetFormat);
+            })
+            .catch((error) => {
+                console.log(error);
+                history.push('/error');
+            });
+    }, [petId, history]);
 
     const adoptedPetHandler = () => {
-        console.log(pet);
         console.log(pet.isAdopted);
-        const updatedPet = { ...pet, isAdopted: true };
+        const adoptedOn = new Date();
+        console.log(adoptedOn);
+        const updatedPet = { ...pet, isAdopted: true, dateAdopted: adoptedOn.toJSON() };
         console.log(updatedPet);
-        // setPet(oldPet => ({ ...oldPet, isAdopted: true }));
 
         firebase.database().ref('pets/' + pet.id).update(updatedPet);
         history.push('/pets/adoption');
@@ -38,7 +40,6 @@ const PetForAdoptionDetails = ({
         console.log(pet.wantToAdopt);
         const updatedPet = { ...pet, wantToAdopt: false, adopter: null };
         console.log(updatedPet);
-        // setPet(oldPet => ({ ...oldPet, wantToAdopt: false }));
 
         firebase.database().ref('/pets/' + pet.id).update(updatedPet);
         history.push('/pets/adoption');

@@ -1,18 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import PetsList from '../Shared/PetsList';
 import firebase from '../../config/firebase';
+import UserContext from '../../contexts/UserContext';
+import PetsList from '../Shared/PetsList';
 
-const PetsForAdoption = () => {
+const MyPets = () => {
     const [pets, setPets] = useState([]);
+    const [user, setUser] = useContext(UserContext);
     const history = useHistory({});
 
     useEffect(() => {
-        firebase.database().ref('pets/').once('value')
+        firebase.database().ref('pets').once('value')
             .then((res) => {
+                console.log(res.val());
+                console.log(user.uid);
                 const correctPetsFormat = Object.entries(res.val()).map(([id, value]) => { return { ...value, id: id } })
-                    .filter(x => x.wantToAdopt === true && x.isAdopted === false)
+                    .filter(x => x.adopter?.uid === user.uid)
                     .sort((a, b) => a['age'] - b['age']);
                 console.log(correctPetsFormat);
                 setPets(correctPetsFormat);
@@ -21,11 +25,11 @@ const PetsForAdoption = () => {
                 console.log(error);
                 history.push('/error');
             });
-    }, [history]);
+    }, [user, history]);
 
     return (
-        <PetsList title="Pets for Adoption" pets={pets} to='/pets/adoption' />
+        <PetsList title="My Pets" pets={pets} to='/pets/my' />
     );
 };
 
-export default PetsForAdoption;
+export default MyPets;

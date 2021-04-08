@@ -25,6 +25,7 @@ const Header = () => {
                         <>
                             <NavLink to="/pets/add" className="header-link">AddPet</NavLink>
                             <NavLink to="/pets/adoption" className="header-link">PetsForAdoption</NavLink>
+                            <NavLink to="/pets/adopted" className="header-link">AdoptedPets</NavLink>
                         </>
                     }
                     <NavLink to="/pets" className="header-link">Pets</NavLink>
@@ -32,7 +33,10 @@ const Header = () => {
                     <NavLink to="/contacts" className="header-link">Contacts</NavLink>
                     {
                         user
-                            ? <NavLink to="/logout" className="header-link">Logout</NavLink>
+                            ? <>
+                                <NavLink to="/pets/my" className="header-link">MyPets</NavLink>
+                                <NavLink to="/logout" className="header-link">Logout</NavLink>
+                            </>
                             : <>
                                 <NavLink to="/register" className="header-link">Register</NavLink>
                                 <NavLink to="/login" className="header-link">Login</NavLink>
@@ -51,6 +55,7 @@ const Header = () => {
                                 <>
                                     <DropdownItem><NavLink to="/pets/add" className="dropdown-link">AddPet</NavLink></DropdownItem>
                                     <DropdownItem><NavLink to="/pets/adoption" className="dropdown-link">PetForAdoption</NavLink></DropdownItem>
+                                    <DropdownItem><NavLink to="/pets/adopted" className="dropdown-link">AdoptedPets</NavLink></DropdownItem>
                                 </>
                             }
                             <DropdownItem><NavLink to="/pets" className="dropdown-link">Pets</NavLink></DropdownItem>
@@ -58,7 +63,10 @@ const Header = () => {
                             <DropdownItem><NavLink to="/contacts" className="dropdown-link">Contacts</NavLink></DropdownItem>
                             {
                                 user
-                                    ? <DropdownItem><NavLink to="/logout" className="dropdown-link">Logout</NavLink></DropdownItem>
+                                    ? <>
+                                        <DropdownItem><NavLink to="/pets/my" className="dropdown-link">MyPets</NavLink></DropdownItem>
+                                        <DropdownItem><NavLink to="/logout" className="dropdown-link">Logout</NavLink></DropdownItem>
+                                    </>
                                     : <>
                                         <DropdownItem><NavLink to="/register" className="dropdown-link">Register</NavLink></DropdownItem>
                                         <DropdownItem><NavLink to="/login" className="dropdown-link">Login</NavLink></DropdownItem>

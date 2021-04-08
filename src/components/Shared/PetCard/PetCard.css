@@ -26,3 +26,17 @@
     left:50%;
     transform: translate(-50%,-50%);
 }
+
+.img-adopted-stamp{
+    position: absolute;
+    top:0;
+    right: 0;
+    width: 100px;
+}
+
+.img-pending-stamp{
+    position: absolute;
+    top:5px;
+    right: 5px;
+    width: 80px;
+}

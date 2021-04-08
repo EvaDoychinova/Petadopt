@@ -10,10 +10,17 @@ const PetCard = ({
 }) => {
     return (
         <Card className="pet-card">
-            <CardBody className="text-center">
+            <CardBody className="text-center position-relative">
                 <CardTitle tag="h5">{pet.name}</CardTitle>
-                <CardSubtitle tag="h6" className="mb-2 text-muted">Age: {pet.age} years</CardSubtitle>
                 <CardSubtitle tag="h6" className="mb-2 text-muted">Gender: {pet.gender}</CardSubtitle>
+                <CardSubtitle tag="h6" className="mb-2 text-muted">Age: {pet.age} years</CardSubtitle>
+                {
+                    pet.wantToAdopt
+                        ?(pet.isAdopted
+                            ? <img src="/img/adopted-stamp.png" alt="Adopted!" className="img-adopted-stamp" />
+                            : <img src="/img/pending-round-stamp.jpg" alt="Pending-Adoption!" className="img-pending-stamp" />) 
+                        : null
+                }
             </CardBody>
             <div className="img-container">
                 <CardImg src={pet.imageUrl} alt="Pet image" className="pet-image" />

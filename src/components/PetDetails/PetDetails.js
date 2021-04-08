@@ -14,23 +14,34 @@ const Pet = ({
     const [user, setUser] = useContext(UserContext);
 
     useEffect(() => {
-        firebase.database().ref('pets/' + petId).once('value').then((res) => {
-            console.log(res.val());
-            const data = res.val();
-            console.log(data);
-            const correctPetFormat = { ...data, id: petId };
-            console.log(correctPetFormat);
-            setPet(correctPetFormat);
-        });
-    }, [petId]);
+        firebase.database().ref('pets/' + petId).once('value')
+            .then((res) => {
+                console.log(res.val());
+                const data = res.val();
+                console.log(data);
+                const correctPetFormat = { ...data, id: petId };
+                console.log(correctPetFormat);
+                setPet(correctPetFormat);
+            })
+            .catch((error) => {
+                console.log(error);
+                let errorCode = error.code;
+                let errorMessage = error.message;
+                console.log(errorCode);
+                console.log(errorMessage);
+                errorCode === 404
+                    ? history.push('/not-found')
+                    : history.push('/error');
+            });
+    }, [petId, history]);
 
     const adoptPetHandler = () => {
         console.log(pet);
         console.log(user);
-        const currentAdopter={
-            uid:user.uid,
-            email:user.email,
-            displayName:user.displayName,
+        const currentAdopter = {
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
         }
         const updatedPet = { ...pet, wantToAdopt: true, adopter: currentAdopter };
         console.log(updatedPet);

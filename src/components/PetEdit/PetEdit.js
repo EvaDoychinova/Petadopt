@@ -1,12 +1,13 @@
-import PetForm from '../Shared/PetForm';
+import { useHistory } from 'react-router-dom';
+
 import firebase from '../../config/firebase';
+import PetForm from '../Shared/PetForm';
 
 const PetEdit = ({
     match,
-    history,
 }) => {
     const petId = match.params.petId;
-    console.log(petId);
+    const history = useHistory({});
 
     const onEditPetSubmitHandler = (currentPet) => {
         firebase.database().ref('pets/' + petId).update(currentPet);

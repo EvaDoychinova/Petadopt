@@ -25,10 +25,6 @@ const Login = () => {
             })
             .catch((error) => {
                 console.log(error);
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.log(errorCode);
-                console.log(errorMessage);
                 history.push('/error');
             });
     };
