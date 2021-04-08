@@ -1,14 +1,14 @@
 import { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import firebase from '../../config/firebase';
 import UserContext from '../../contexts/UserContext';
 import PetsList from '../Shared/PetsList';
 
-const MyPets = () => {
+const MyPets = ({
+    history,
+}) => {
     const [pets, setPets] = useState([]);
-    const [user, setUser] = useContext(UserContext);
-    const history = useHistory({});
+    const [user] = useContext(UserContext);
 
     useEffect(() => {
         firebase.database().ref('pets').once('value')

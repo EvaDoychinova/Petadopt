@@ -1,11 +1,9 @@
-import { useHistory } from 'react-router-dom';
-
 import firebase from '../../config/firebase';
 import PetForm from '../Shared/PetForm/PetForm';
 
-const PetAdd = () => {
-    const history = useHistory({});
-
+const PetAdd = ({
+    history,
+}) => {
     const onAddPetSubmitHandler = (currentPet) => {
         var newPet = {
             name: currentPet.name,

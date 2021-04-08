@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
 
 import firebase from '../../config/firebase';
 import PetData from '../Shared/PetData';
 
-const PetForAdoptionDetails = () => {
+const PetForAdoptionDetails = ({
+    match,
+    history,
+}) => {
     const [pet, setPet] = useState({});
-    const history = useHistory({});
 
-    const params = useParams();
-    const petId = params.petId;
+    const petId = match.params.petId;
 
     useEffect(() => {
         firebase.database().ref('pets/' + petId).once('value')

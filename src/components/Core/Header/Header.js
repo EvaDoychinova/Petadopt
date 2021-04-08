@@ -12,7 +12,7 @@ import './Header.css';
 const Header = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [dropdownPhoneMenuOpen, setDropdownPhoneMenuOpen] = useState(false);
-    const [user, setUser] = useContext(UserContext);
+    const [user] = useContext(UserContext);
 
     const toggle = () => setDropdownOpen(!dropdownOpen);
     const togglePhoneMenu = () => setDropdownPhoneMenuOpen(!dropdownPhoneMenuOpen);

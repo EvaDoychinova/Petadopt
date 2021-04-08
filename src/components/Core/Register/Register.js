@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 import UserContext from '../../../contexts/UserContext';
@@ -7,9 +6,10 @@ import firebase from '../../../config/firebase';
 
 import './Register.css';
 
-const Register = () => {
+const Register = ({
+    history,
+}) => {
     const [user, setUser] = useContext(UserContext);
-    const history = useHistory({});
 
     const onRegisterSubmitHandler = (e) => {
         e.preventDefault();

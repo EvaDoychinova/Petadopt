@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { ListGroup, ListGroupItem, Button } from 'reactstrap';
 
 import ButtonLink from '../Shared/ButtonLink';
@@ -9,10 +8,10 @@ import './PetDelete.css';
 
 const PetDelete = ({
     match,
+    history,
 }) => {
     const petId = match.params.petId;
     const [pet, setPet] = useState({});
-    const history = useHistory({});
 
     useEffect(() => {
         firebase.database().ref('pets/' + petId).once('value').then((res) => {

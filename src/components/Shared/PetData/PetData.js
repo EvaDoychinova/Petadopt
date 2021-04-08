@@ -17,7 +17,7 @@ const PetData = ({
     editLink,
     deleteLink,
 }) => {
-    const [user, setUser] = useContext(UserContext);
+    const [user] = useContext(UserContext);
 
     return (
         <div className="main-content pet-details-page-content">
@@ -43,7 +43,7 @@ const PetData = ({
                 }
             </ListGroup>
             <div className="row pt-2">
-                {(user && pet.isAdopted === false)
+                {(user && pet.isAdopted === false && button1Handler && button1Title)
                     ? <Button color="info" className="col ml-3 mr-3" onClick={button1Handler}>{button1Title}</Button>
                     : null}
                 {(button2Handler && button2Title)

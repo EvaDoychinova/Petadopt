@@ -59,7 +59,7 @@
     margin: auto 0;
 }
 
-@media(min-width: 768px){
+@media(min-width: 825px){
     .screen-navigation{
         display:block;
     }

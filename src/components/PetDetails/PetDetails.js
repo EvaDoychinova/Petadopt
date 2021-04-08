@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 
-import UserContext from '../../contexts/UserContext';
 import firebase from '../../config/firebase';
+import UserContext from '../../contexts/UserContext';
 import PetData from '../Shared/PetData';
 
 const Pet = ({
@@ -11,27 +11,19 @@ const Pet = ({
     const petId = match.params.petId;
     console.log(petId);
     const [pet, setPet] = useState({});
-    const [user, setUser] = useContext(UserContext);
+    const [user] = useContext(UserContext);
 
     useEffect(() => {
         firebase.database().ref('pets/' + petId).once('value')
             .then((res) => {
-                console.log(res.val());
                 const data = res.val();
-                console.log(data);
                 const correctPetFormat = { ...data, id: petId };
                 console.log(correctPetFormat);
                 setPet(correctPetFormat);
             })
             .catch((error) => {
                 console.log(error);
-                let errorCode = error.code;
-                let errorMessage = error.message;
-                console.log(errorCode);
-                console.log(errorMessage);
-                errorCode === 404
-                    ? history.push('/not-found')
-                    : history.push('/error');
+                history.push('/error');
             });
     }, [petId, history]);
 
