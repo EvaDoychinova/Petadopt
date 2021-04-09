@@ -1,12 +1,10 @@
-import {Fragment} from 'react';
-
 import './Contacts.css';
 
 const Contacts=()=>{
     return(
-        <Fragment>
-            <h1>Contacts Page</h1>
-        </Fragment>
+        <div className="main-content contacts-page-content">
+            <h2>Contacts Page</h2>
+        </div>
     );
 }
 
