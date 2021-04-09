@@ -22,7 +22,7 @@ const PetForm = ({
     const [nameErrorMessage, setNameErrorMessage]=useState('');
     const [isVisibleAlert, setIsVisibleAlert] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [isDisabled, setIsDisabled] = useState(true);
+    const [isDisabled, setIsDisabled] = useState(false);
     const history = useHistory({});
 
     useEffect(() => {

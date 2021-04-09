@@ -5,7 +5,6 @@ import { ListGroup, ListGroupItem, Button } from 'reactstrap';
 import firebase from '../../../config/firebase';
 import Admin from '../../../secrets/admin.json';
 import UserContext from '../../../contexts/UserContext';
-import PetContext from '../../../contexts/PetContext';
 import ButtonLink from '../ButtonLink';
 import Loading from '../Loading';
 
@@ -22,7 +21,7 @@ const PetData = ({
     deleteLink,
 }) => {
     const [user] = useContext(UserContext);
-    const [pet, setPet] = useContext(PetContext);
+    const [pet, setPet] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const history = useHistory({});
 
@@ -41,6 +40,14 @@ const PetData = ({
                 history.push('/error');
             });
     }, [petId, history, setPet]);
+
+    const onButton1Handler=()=>{
+        button1Handler(pet);
+    }
+
+    const onButton2Handler=()=>{
+        button2Handler(pet);
+    }
 
     if (isLoading) {
         return <Loading />;
@@ -71,10 +78,10 @@ const PetData = ({
             </ListGroup>
             <div className="row pt-2">
                 {(user && pet.isAdopted === false && button1Handler && button1Title)
-                    ? <Button color="info" className="col ml-3 mr-3" onClick={button1Handler}>{button1Title}</Button>
+                    ? <Button color="info" className="col ml-3 mr-3" onClick={onButton1Handler}>{button1Title}</Button>
                     : null}
                 {(button2Handler && button2Title)
-                    ? <Button color="info" className="col ml-3 mr-3" onClick={button2Handler}>{button2Title}</Button>
+                    ? <Button color="info" className="col ml-3 mr-3" onClick={onButton2Handler}>{button2Title}</Button>
                     : null}
                 <ButtonLink color="secondary" to={backButtonLink} className="col ml-3 mr-3">Back to Pets</ButtonLink>
             </div>

@@ -1,18 +1,13 @@
-import { useState } from 'react';
-
 import firebase from '../../config/firebase';
-import PetContext from '../../contexts/PetContext';
 import PetData from '../Shared/PetData';
 
 const PetForAdoptionDetails = ({
     match,
     history,
 }) => {
-    const [pet, setPet] = useState({});
-
     const petId = match.params.petId;
 
-    const adoptedPetHandler = () => {
+    const adoptedPetHandler = (pet) => {
         const adoptedOn = new Date();
         const updatedPet = { ...pet, isAdopted: true, dateAdopted: adoptedOn.toJSON() };
         console.log(updatedPet);
@@ -21,7 +16,7 @@ const PetForAdoptionDetails = ({
         history.push('/pets/adoption');
     };
 
-    const unadoptPetHandler = () => {
+    const unadoptPetHandler = (pet) => {
         console.log(pet.wantToAdopt);
         const updatedPet = { ...pet, wantToAdopt: false, adopter: null };
         console.log(updatedPet);
@@ -31,7 +26,6 @@ const PetForAdoptionDetails = ({
     };
 
     return (
-        <PetContext.Provider value={[pet, setPet]}>
             <PetData
                 petId={petId}
                 button1Handler={adoptedPetHandler}
@@ -41,7 +35,6 @@ const PetForAdoptionDetails = ({
                 backButtonLink="/pets/adoption"
                 editLink={`/pets/edit/${petId}`}
                 deleteLink={`/pets/delete/${petId}`} />
-        </PetContext.Provider>
     );
 };
 
