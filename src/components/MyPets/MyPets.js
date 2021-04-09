@@ -13,8 +13,6 @@ const MyPets = ({
     useEffect(() => {
         firebase.database().ref('pets').once('value')
             .then((res) => {
-                console.log(res.val());
-                console.log(user.uid);
                 const correctPetsFormat = Object.entries(res.val()).map(([id, value]) => { return { ...value, id: id } })
                     .filter(x => x.adopter?.uid === user.uid)
                     .sort((a, b) => a['age'] - b['age']);

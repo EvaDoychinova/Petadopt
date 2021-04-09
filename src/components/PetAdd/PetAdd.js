@@ -26,7 +26,6 @@ const PetAdd = ({
             pageTitle="Add new pet"
             submitButtonTitle="Add the pet"
             backButtonTitle="Back to pets"
-            // backButtonLink="/pets"
             onFormSubmitHandler={onAddPetSubmitHandler} />
     );
 };

@@ -15,9 +15,7 @@ const PetDelete = ({
 
     useEffect(() => {
         firebase.database().ref('pets/' + petId).once('value').then((res) => {
-            console.log(res.val());
             const data = res.val();
-            console.log(data);
             const correctPetFormat = { ...data, id: petId };
             console.log(correctPetFormat);
             setPet(correctPetFormat);

@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react'
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
 
-import ButtonLink from '../ButtonLink';
 import firebase from '../../../config/firebase';
+import ButtonLink from '../ButtonLink';
+import ValidationError from '../ValidationError';
 
 import './PetForm.css';
 
@@ -17,34 +19,73 @@ const PetForm = ({
     const [pet, setPet] = useState({});
     const [categories, setCategories] = useState([]);
     const [gender, setGender] = useState();
+    const [nameErrorMessage, setNameErrorMessage]=useState('');
+    const [isVisibleAlert, setIsVisibleAlert] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [isDisabled, setIsDisabled] = useState(true);
+    const history = useHistory({});
 
     useEffect(() => {
-        firebase.database().ref('categories/').once('value').then((res) => {
-            console.log(res.val());
-            const correctCategoriesFormat = Object.entries(res.val()).map(([id, value]) => { return { ...value, id: id } })
-                .sort((a, b) => a['name'].localeCompare(b['name']));;
-            console.log(correctCategoriesFormat);
-            setCategories(correctCategoriesFormat);
-        });
-    }, []);
+        firebase.database().ref('categories/').once('value')
+            .then((res) => {
+                const correctCategoriesFormat = Object.entries(res.val()).map(([id, value]) => { return { ...value, id: id } })
+                    .sort((a, b) => a['name'].localeCompare(b['name']));;
+                console.log(correctCategoriesFormat);
+                setCategories(correctCategoriesFormat);
+            })
+            .catch((error) => {
+                console.log(error);
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                if (errorCode) {
+                    setErrorMessage(errorMessage);
+                    setIsVisibleAlert(true);
+                } else {
+                    history.push('/error');
+                }
+            });
+    }, [history]);
 
     useEffect(() => {
-        firebase.database().ref('pets/' + petId).once('value').then((res) => {
-            console.log(res.val());
-            const data = res.val();
-            console.log(data);
-            const correctPetFormat = { ...data, id: petId };
-            console.log(correctPetFormat);
-            setPet(correctPetFormat);
-            setGender(correctPetFormat.gender);
-        });
-    }, [petId]);
+        firebase.database().ref('pets/' + petId).once('value')
+            .then((res) => {
+                const data = res.val();
+                const correctPetFormat = { ...data, id: petId };
+                console.log(correctPetFormat);
+                setPet(correctPetFormat);
+                setGender(correctPetFormat.gender);
+            })
+            .catch((error) => {
+                console.log(error);
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                if (errorCode) {
+                    setErrorMessage(errorMessage);
+                    setIsVisibleAlert(true);
+                } else {
+                    history.push('/error');
+                }
+            });
+    }, [petId, history]);
+
+    const onAlertDismiss = () => {
+        setIsVisibleAlert(false);
+    }
+
+    const onNameChangeHandler = (e) => {
+        const input = e.target.value;
+
+        if (input.length < 2 || input.length > 20) {
+            setNameErrorMessage('Name should be between 2 and 20 characters long!');
+            setIsDisabled(true);
+        } else {
+            setNameErrorMessage('');
+            setIsDisabled(false);
+        }
+    };
 
     const onChangeHandler = (e) => {
-        console.log(e);
         let property = e.target.name;
-        console.log(property);
-
         const updatedPet = { ...pet, [property]: e.target.value };
         console.log(updatedPet);
         setPet(updatedPet);
@@ -52,7 +93,6 @@ const PetForm = ({
 
     const onGenderChangeHandler = (e) => {
         let newGender = e.target.value;
-        console.log(newGender);
         setGender(newGender);
         const updatedPet = { ...pet, gender: newGender };
         console.log(updatedPet)
@@ -61,14 +101,13 @@ const PetForm = ({
 
     const formSubmitHandler = (e) => {
         e.preventDefault();
-        console.log(e.target);
-
         onFormSubmitHandler(pet);
     };
 
     return (
         <div className="main-content pet-form-content">
             <h2 className="text-center">{pageTitle}</h2>
+            <Alert color="danger" isOpen={isVisibleAlert} toggle={onAlertDismiss}>{errorMessage}</Alert>
             <Form onSubmit={formSubmitHandler} className="m-auto">
                 <FormGroup>
                     <Label htmlFor="name">Name</Label>
@@ -78,7 +117,8 @@ const PetForm = ({
                         name="name"
                         className="form-control-sm"
                         defaultValue={pet?.name}
-                        onBlur={onChangeHandler} />
+                        onBlur={onNameChangeHandler} />
+                        <ValidationError>{nameErrorMessage}</ValidationError>
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="imageUrl">ImageUrl</Label>
@@ -166,7 +206,7 @@ const PetForm = ({
                         onBlur={onChangeHandler} />
                 </FormGroup>
                 <FormGroup className="text-center m-0">
-                    <Button type="submit" color="info" className="mr-3">{submitButtonTitle}</Button>
+                    <Button type="submit" color="info" className="mr-3" disabled={isDisabled}>{submitButtonTitle}</Button>
                     <ButtonLink
                         color="secondary"
                         to={(pet?.adopter ? '/pets/adoption' : '/pets') + (backButtonLink ? backButtonLink : '')}

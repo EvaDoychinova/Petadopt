@@ -8,11 +8,11 @@ const Pet = ({
     match,
     history,
 }) => {
-    const petId = match.params.petId;
-    console.log(petId);
     const [pet, setPet] = useState({});
     const [user] = useContext(UserContext);
-
+    
+    const petId = match.params.petId;
+    
     useEffect(() => {
         firebase.database().ref('pets/' + petId).once('value')
             .then((res) => {

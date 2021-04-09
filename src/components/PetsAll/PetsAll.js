@@ -14,18 +14,11 @@ const PetsAll = ({
                 const correctPetsFormat = Object.entries(res.val()).map(([id, value]) => { return { ...value, id: id } })
                     .filter(x => x.wantToAdopt === false)
                     .sort((a, b) => a['age'] - b['age']);
-                console.log(correctPetsFormat);
                 setPets(correctPetsFormat);
             })
             .catch((error) => {
                 console.log(error);
-                let errorCode = error.code;
-                let errorMessage = error.message;
-                console.log(errorCode);
-                console.log(errorMessage);
-                errorCode === 404
-                    ? history.push('/not-found')
-                    : history.push('/error');
+                history.push('/error');
             });
     }, [history]);
 

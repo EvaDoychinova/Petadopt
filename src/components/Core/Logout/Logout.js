@@ -7,7 +7,7 @@ import UserContext from '../../../contexts/UserContext';
 const Logout = ({
     history,
 }) => {
-    const [user, setUser]=useContext(UserContext)
+    const [, setUser]=useContext(UserContext)
     useEffect(() => {
         firebase.auth().signOut()
             .then(()=>{

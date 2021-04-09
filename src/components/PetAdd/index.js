@@ -1,1 +1,1 @@
-export {default} from './PetAdd';
+export { default } from './PetAdd';
