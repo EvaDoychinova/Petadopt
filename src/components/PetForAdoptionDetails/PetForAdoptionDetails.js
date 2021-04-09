@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import firebase from '../../config/firebase';
+import PetContext from '../../contexts/PetContext';
 import PetData from '../Shared/PetData';
 
 const PetForAdoptionDetails = ({
@@ -11,24 +12,8 @@ const PetForAdoptionDetails = ({
 
     const petId = match.params.petId;
 
-    useEffect(() => {
-        firebase.database().ref('pets/' + petId).once('value')
-            .then((res) => {
-                const data = res.val();
-                const correctPetFormat = { ...data, id: petId };
-                console.log(correctPetFormat);
-                setPet(correctPetFormat);
-            })
-            .catch((error) => {
-                console.log(error);
-                history.push('/error');
-            });
-    }, [petId, history]);
-
     const adoptedPetHandler = () => {
-        console.log(pet.isAdopted);
         const adoptedOn = new Date();
-        console.log(adoptedOn);
         const updatedPet = { ...pet, isAdopted: true, dateAdopted: adoptedOn.toJSON() };
         console.log(updatedPet);
 
@@ -46,15 +31,17 @@ const PetForAdoptionDetails = ({
     };
 
     return (
-        <PetData
-            pet={pet}
-            button1Handler={adoptedPetHandler}
-            button1Title="Adopted"
-            button2Handler={unadoptPetHandler}
-            button2Title="Unadopt"
-            backButtonLink="/pets/adoption"
-            editLink={`/pets/edit/${pet.id}`}
-            deleteLink={`/pets/delete/${pet.id}`} />
+        <PetContext.Provider value={[pet, setPet]}>
+            <PetData
+                petId={petId}
+                button1Handler={adoptedPetHandler}
+                button1Title="Adopted"
+                button2Handler={unadoptPetHandler}
+                button2Title="Unadopt"
+                backButtonLink="/pets/adoption"
+                editLink={`/pets/edit/${petId}`}
+                deleteLink={`/pets/delete/${petId}`} />
+        </PetContext.Provider>
     );
 };
 

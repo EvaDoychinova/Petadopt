@@ -1,36 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import firebase from '../../config/firebase';
+import PetContext from '../../contexts/PetContext';
 import PetData from '../Shared/PetData';
 
 const AdoptedPetDetails = ({
     match,
-    history,
 }) => {
     const [pet, setPet] = useState({});
-    
+
     const petId = match.params.petId;
 
-    useEffect(() => {
-        firebase.database().ref('pets/' + petId).once('value')
-            .then((res) => {
-                const data = res.val();
-                const correctPetFormat = { ...data, id: petId };
-                console.log(correctPetFormat);
-                setPet(correctPetFormat);
-            })
-            .catch((error) => {
-                console.log(error);
-                history.push('/error');
-            });
-    }, [petId, history]);
-
     return (
-        <PetData
-            pet={pet}
-            backButtonLink="/pets/adopted"
-            editLink={`/pets/edit/${pet.id}`}
-            deleteLink={`/pets/delete/${pet.id}`} />
+        <PetContext.Provider value={[pet, setPet]}>
+            <PetData
+                petId={petId}
+                backButtonLink="/pets/adopted"
+                editLink={`/pets/edit/${petId}`}
+                deleteLink={`/pets/delete/${petId}`} />
+        </PetContext.Provider>
     );
 };
 

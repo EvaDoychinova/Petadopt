@@ -1,14 +1,18 @@
-import { useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { ListGroup, ListGroupItem, Button } from 'reactstrap';
 
+import firebase from '../../../config/firebase';
 import Admin from '../../../secrets/admin.json';
 import UserContext from '../../../contexts/UserContext';
+import PetContext from '../../../contexts/PetContext';
 import ButtonLink from '../ButtonLink';
+import Loading from '../Loading';
 
 import './PetData.css';
 
 const PetData = ({
-    pet,
+    petId,
     button1Handler,
     button1Title,
     button2Handler,
@@ -18,6 +22,29 @@ const PetData = ({
     deleteLink,
 }) => {
     const [user] = useContext(UserContext);
+    const [pet, setPet] = useContext(PetContext);
+    const [isLoading, setIsLoading] = useState(true);
+    const history = useHistory({});
+
+    useEffect(() => {
+        firebase.database().ref('pets/' + petId).once('value')
+            .then((res) => {
+                const data = res.val();
+                const correctPetFormat = { ...data, id: petId };
+                console.log(correctPetFormat);
+                setPet(correctPetFormat);
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                setIsLoading(false);
+                history.push('/error');
+            });
+    }, [petId, history, setPet]);
+
+    if (isLoading) {
+        return <Loading />;
+    }
 
     return (
         <div className="main-content pet-details-page-content">

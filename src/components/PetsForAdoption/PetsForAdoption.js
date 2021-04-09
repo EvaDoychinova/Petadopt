@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 
-import PetsList from '../Shared/PetsList';
 import firebase from '../../config/firebase';
+import PetsList from '../Shared/PetsList';
+import Loading from '../Shared/Loading';
 
 const PetsForAdoption = ({
     history,
 }) => {
     const [pets, setPets] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         firebase.database().ref('pets/').once('value')
@@ -16,12 +18,18 @@ const PetsForAdoption = ({
                     .sort((a, b) => a['age'] - b['age']);
                 console.log(correctPetsFormat);
                 setPets(correctPetsFormat);
+                setIsLoading(false);
             })
             .catch((error) => {
                 console.log(error);
+                setIsLoading(false);
                 history.push('/error');
             });
     }, [history]);
+
+    if (isLoading) {
+        return <Loading />
+    }
 
     return (
         <PetsList title="Pets for Adoption" pets={pets} to='/pets/adoption' />

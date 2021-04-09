@@ -14,8 +14,8 @@ import Contacts from './components/Core/Contacts';
 import Register from './components/Core/Register';
 import Login from './components/Core/Login';
 import Logout from './components/Core/Logout';
-import PetAdd from './components/PetAdd';
 import PetsAll from './components/PetsAll';
+import PetAdd from './components/PetAdd';
 import PetDetails from './components/PetDetails';
 import PetDelete from './components/PetDelete';
 import PetEdit from './components/PetEdit';
@@ -45,37 +45,31 @@ const App = () => {
 				<Header />
 				<div className="main-container">
 					<ErrorBoundary>
-						<Switch>
-							<Route path="/" exact component={Home} />
-							<Route path="/#" exact component={Home} />
-							<Route path="/home" exact component={Home} />
-							<Route path="/about" exact component={About} />
-							<Route path="/privacy" exact component={Privacy} />
-							<Route path="/contacts" exact component={Contacts} />
-							<Route path="/pets" exact component={PetsAll} />
-							<ProtectedUserRoute path="/pets/my" exact component={MyPets} redirectPath="/"/>
-							<ProtectedAdminRoute path="/pets/add" exact component={PetAdd} redirectPath="/"/>
-							<ProtectedAdminRoute path="/pets/adoption" exact component={PetsForAdoption} redirectPath="/"/>
-							<ProtectedAdminRoute path="/pets/adopted" exact component={AdoptedPets} redirectPath="/"/>
-							<ProtectedAnonymousRoute path="/register" exact component={Register} redirectPath="/"/>
-							<ProtectedAnonymousRoute path="/login" exact component={Login} redirectPath="/"/>
-							{/* <Route path="/logout" exact render={() => {
-								if (user) {
-									firebase.auth().signOut();
-								}
-								return <Redirect to="/" />
-							}} /> */}
-							<ProtectedUserRoute path="/logout" exact component={Logout} redirectPath="/"/>
-							<ProtectedAdminRoute path="/pets/edit/:petId" component={PetEdit} redirectPath="/pets"/>
-							<ProtectedAdminRoute path="/pets/delete/:petId" component={PetDelete} redirectPath="/pets"/>
-							<ProtectedAdminRoute path="/pets/adoption/:petId" component={PetForAdoptionDetails} redirectPath="/pets/:petId"/>
-							<ProtectedAdminRoute path="/pets/adopted/:petId" component={AdoptedPetDetails} redirectPath="/pets/:petId"/>
-							<ProtectedUserRoute path="/pets/my/:petId" component={MyPetDetails} redirectPath="/pets/:petId"/>
-							<Route path="/pets/:petId" component={PetDetails} />
+							<Switch>
+								<Route path="/" exact component={Home} />
+								<Route path="/#" exact component={Home} />
+								<Route path="/home" exact component={Home} />
+								<Route path="/about" exact component={About} />
+								<Route path="/privacy" exact component={Privacy} />
+								<Route path="/contacts" exact component={Contacts} />
+								<Route path="/pets" exact component={PetsAll} />
+								<ProtectedUserRoute path="/pets/my" exact component={MyPets} redirectPath="/" />
+								<ProtectedAdminRoute path="/pets/add" exact component={PetAdd} redirectPath="/" />
+								<ProtectedAdminRoute path="/pets/adoption" exact component={PetsForAdoption} redirectPath="/" />
+								<ProtectedAdminRoute path="/pets/adopted" exact component={AdoptedPets} redirectPath="/" />
+								<ProtectedAnonymousRoute path="/register" exact component={Register} redirectPath="/" />
+								<ProtectedAnonymousRoute path="/login" exact component={Login} redirectPath="/" />
+								<ProtectedUserRoute path="/logout" exact component={Logout} redirectPath="/" />
+								<ProtectedAdminRoute path="/pets/edit/:petId" component={PetEdit} redirectPath="/pets" />
+								<ProtectedAdminRoute path="/pets/delete/:petId" component={PetDelete} redirectPath="/pets" />
+								<ProtectedAdminRoute path="/pets/adoption/:petId" component={PetForAdoptionDetails} redirectPath="/pets/:petId" />
+								<ProtectedAdminRoute path="/pets/adopted/:petId" component={AdoptedPetDetails} redirectPath="/pets/:petId" />
+								<ProtectedUserRoute path="/pets/my/:petId" component={MyPetDetails} redirectPath="/pets/:petId" />
+								<Route path="/pets/:petId" component={PetDetails} />
 
-							<Route path="/error" component={CodeError} />
-							<Route component={NotFoundError} />
-						</Switch>
+								<Route path="/error" exact component={CodeError} />
+								<Route component={NotFoundError} />
+							</Switch>
 					</ErrorBoundary>
 				</div>
 				<Footer />
