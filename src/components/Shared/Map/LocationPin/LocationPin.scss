@@ -1,0 +1,28 @@
+.location-pin {
+    display: flex;
+    align-items: center;
+    width: 180px;
+    color: var(--main-blue);
+
+    &-icon {
+        font-size: 4rem;
+        color: #138496;
+    }
+
+    &-text {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #353536;
+    }
+
+    @media screen and (min-width:799px) {
+
+        & {
+            width: 15vw;
+        }
+
+        &-icon {
+            font-size: 10vw;
+        }
+    }
+}
