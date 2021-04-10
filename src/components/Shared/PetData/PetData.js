@@ -8,7 +8,7 @@ import UserContext from '../../../contexts/UserContext';
 import ButtonLink from '../ButtonLink';
 import Loading from '../Loading';
 
-import './PetData.css';
+import './PetData.scss';
 
 const PetData = ({
     petId,
@@ -54,12 +54,12 @@ const PetData = ({
     }
 
     return (
-        <div className="main-content pet-details-page-content">
+        <div className="main-content pet-details">
             <h2 className="text-center pb-3">{pet.name} Details Page</h2>
-            <div className="details-img-wrapper">
-                <img src={pet.imageUrl} alt="The Pet" className="details-img" />
+            <div className="pet-details-img-wrapper">
+                <img src={pet.imageUrl} alt="The Pet" className="pet-details-img" />
             </div>
-            <ListGroup flush className="details-section">
+            <ListGroup flush className="pet-details-section">
                 <ListGroupItem><b>Gender:</b> {pet.gender}</ListGroupItem>
                 <ListGroupItem><b>Age:</b> {pet.age} y.</ListGroupItem>
                 <ListGroupItem><b>Weight:</b> {pet.weight} kg</ListGroupItem>

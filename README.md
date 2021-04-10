@@ -1,10 +1,10 @@
 # PetAdopt
-*Because they bring love*
+*Because our pets bring love*
 
 ## What's it about?
-This is an application for animal shelter and its pets. <br>
-It is designed to facilitate the process of adopting a desired pet<br><br>
-*Personal projects for non-commercial use*
+This is an application for an animal shelter and its pets. <br>
+It is designed to facilitate the process of adopting a desired pet. <br><br>
+*Personal project for non-commercial use*
  
 ## Structure
 The application is split in three main parts
@@ -30,11 +30,9 @@ The application is split in three main parts
 * Additional
     * Error Pages
         * 404 Not Found Page
-        * Compilation error with ErrorBoundary
+        * ErrorBoundary
   
 <br />
-
----
 
 ## Technologies used for "PetAdopt":
 
@@ -45,8 +43,6 @@ The application is split in three main parts
 - React-icons
 - SaSS Stylesheets
 - Google Maps Integration
-
----
 
 <br />
 
@@ -64,11 +60,8 @@ The application is split in three main parts
 
 <br>
 
- *  *  *  *  *
-
-
-#### Available Scripts for local build
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). <br>
+### Available Scripts for local build
+This project was created with [Create React App](https://github.com/facebook/create-react-app). <br>
 Run the following commands in the project directory:
 
 `npm install` <br>

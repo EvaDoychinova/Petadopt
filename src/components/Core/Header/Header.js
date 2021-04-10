@@ -5,9 +5,8 @@ import { FaBars } from 'react-icons/fa';
 
 import Admin from '../../../secrets/admin.json';
 import UserContext from '../../../contexts/UserContext';
-// import MenuBars from '../../../svg/bars-solid.svg';
 
-import './Header.css';
+import './Header.scss';
 
 const Header = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -85,6 +84,11 @@ const Header = () => {
                     </Dropdown>
                 </div>
             </div >
+            {
+                user
+                ?<span className="header-welcome">Welcome, {user.displayName}</span>
+                :null
+            }
         </header >
     );
 }

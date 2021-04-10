@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 
 import {Button} from 'reactstrap';
 
-import './ButtonLink.css';
+import './ButtonLink.scss';
 
 const ButtonLink = ({
     children,

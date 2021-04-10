@@ -1,4 +1,3 @@
-// import {Component} from 'react';
 import GoogleMapReact from 'google-map-react';
 
 import GoogleMaps from '../../../../secrets/google-maps.json';
@@ -22,7 +21,7 @@ const MapComponent = ({
             <LocationPin
                 lat={location.lat}
                 lng={location.lng}
-                text={location.address}
+                text={location.name}
             />
         </GoogleMapReact>
     );

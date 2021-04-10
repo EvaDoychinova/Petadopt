@@ -2,7 +2,7 @@ import { Card, CardBody, CardTitle, CardSubtitle, CardText, CardImg } from 'reac
 
 import ButtonLink from '../ButtonLink';
 
-import './PetCard.css';
+import './PetCard.scss';
 
 const PetCard = ({
     pet,
@@ -16,12 +16,12 @@ const PetCard = ({
                 <CardSubtitle tag="h6" className="mb-2 text-muted">Age: {pet.age} years</CardSubtitle>
                 {
                     pet.isAdopted
-                        ? <img src="/img/adopted-stamp.png" alt="Adopted!" className="img-adopted-stamp" />
+                        ? <img src="/img/adopted-stamp.png" alt="Adopted!" className="pet-card-adopted-stamp" />
                         : null
                 }
             </CardBody>
-            <div className="img-container">
-                <CardImg src={pet.imageUrl} alt="Pet image" className="pet-image" />
+            <div className="pet-card-img-wrapper">
+                <CardImg src={pet.imageUrl} alt="Pet image" className="pet-card-img" />
             </div>
             <CardBody className="text-center">
                 <CardText>{pet.description}</CardText>
