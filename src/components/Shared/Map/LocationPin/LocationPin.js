@@ -1,4 +1,4 @@
-import { ImLocation } from 'react-icons/im';
+import { MdMyLocation } from 'react-icons/md';
 
 import './LocationPin.scss';
 
@@ -7,7 +7,7 @@ const LocationPin = ({
 }) => {
     return (
         <div className="location-pin">
-            <ImLocation className="location-pin-icon" />
+            <MdMyLocation className="location-pin-icon" />
             <p className="location-pin-text">{text}</p>
         </div>
     );

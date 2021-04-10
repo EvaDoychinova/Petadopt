@@ -1,3 +1,4 @@
+// import {Component} from 'react';
 import GoogleMapReact from 'google-map-react';
 
 import GoogleMaps from '../../../../secrets/google-maps.json';
@@ -9,8 +10,13 @@ const MapComponent = ({
 }) => {
     return (
         <GoogleMapReact
-            bootstrapURLKeys={{ key: GoogleMaps.ApiKey }}
-            defaultCenter={location}
+            bootstrapURLKeys={{
+                key: GoogleMaps.ApiKey
+            }}
+            defaultCenter={{
+                lat: location.lat,
+                lng: location.lng
+            }}
             defaultZoom={zoomLevel}
         >
             <LocationPin
@@ -21,5 +27,34 @@ const MapComponent = ({
         </GoogleMapReact>
     );
 }
+
+// class MapComponent extends Component {
+//     static defaultProps = {
+//         center: { lat: GoogleMaps.location.lat, lng: GoogleMaps.location.lng },
+//         zoom: 15
+//     };
+
+//     render() {
+
+//         return (
+//             <GoogleMapReact
+//                 bootstrapURLKeys={{
+//                     key: GoogleMaps.ApiKey
+//                 }}
+//                 defaultCenter={{
+//                     lat: this.props.location.lat,
+//                     lng: this.props.location.lng
+//                 }}
+//                 defaultZoom={this.props.zoom}
+//             >
+//                 <LocationPin
+//                     lat={this.props.location.lat}
+//                     lng={this.props.location.lng}
+//                     text={this.props.location.address}
+//                 />
+//             </GoogleMapReact>
+//         );
+//     }
+// }
 
 export default MapComponent;

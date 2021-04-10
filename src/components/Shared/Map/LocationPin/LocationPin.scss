@@ -1,11 +1,13 @@
 .location-pin {
-    display: flex;
+    width: 150px;
+    display: inline-flex;
+    text-align: center;
     align-items: center;
-    width: 180px;
-    color: var(--main-blue);
+    justify-content: center;
+    transform: translate(-50%, -50%);
 
     &-icon {
-        font-size: 4rem;
+        font-size: 2rem;
         color: #138496;
     }
 
@@ -13,16 +15,14 @@
         font-size: 1rem;
         font-weight: 500;
         color: #353536;
+        position: absolute;
+        top:-65px;
     }
 
-    @media screen and (min-width:799px) {
-
-        & {
-            width: 15vw;
-        }
+    @media (min-width:799px) {
 
         &-icon {
-            font-size: 10vw;
+            font-size: 2rem;
         }
     }
 }
