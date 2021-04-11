@@ -85,7 +85,7 @@ const Header = () => {
                 </div>
             </div >
             {
-                user
+                user?.displayName
                 ?<span className="header-welcome">Welcome, {user.displayName}</span>
                 :null
             }

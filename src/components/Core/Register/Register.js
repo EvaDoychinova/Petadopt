@@ -93,7 +93,7 @@ const Register = ({
                     displayName: displayName,
                 })
                     .then(() => {
-                        setUser(currentUser);
+                        setUser({...currentUser, displayName: displayName});
                         history.push('/');
                     })
                     .catch((error) => {

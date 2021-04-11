@@ -16,10 +16,10 @@ const PetForm = ({
     backButtonTitle,
     onFormSubmitHandler,
 }) => {
-    const [pet, setPet] = useState({});
+    const [pet, setPet] = useState({category: 'cat'});
     const [categories, setCategories] = useState([]);
     const [gender, setGender] = useState();
-    const [nameErrorMessage, setNameErrorMessage]=useState('');
+    const [nameErrorMessage, setNameErrorMessage] = useState('');
     const [isVisibleAlert, setIsVisibleAlert] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
@@ -47,25 +47,27 @@ const PetForm = ({
     }, [history]);
 
     useEffect(() => {
-        firebase.database().ref('pets/' + petId).once('value')
-            .then((res) => {
-                const data = res.val();
-                const correctPetFormat = { ...data, id: petId };
-                console.log(correctPetFormat);
-                setPet(correctPetFormat);
-                setGender(correctPetFormat.gender);
-            })
-            .catch((error) => {
-                console.log(error);
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                if (errorCode) {
-                    setErrorMessage(errorMessage);
-                    setIsVisibleAlert(true);
-                } else {
-                    history.push('/error');
-                }
-            });
+        if (petId) {
+            firebase.database().ref('pets/' + petId).once('value')
+                .then((res) => {
+                    const data = res.val();
+                    const correctPetFormat = { ...data, id: petId };
+                    console.log(correctPetFormat);
+                    setPet(correctPetFormat);
+                    setGender(correctPetFormat.gender);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    if (errorCode) {
+                        setErrorMessage(errorMessage);
+                        setIsVisibleAlert(true);
+                    } else {
+                        history.push('/error');
+                    }
+                });
+        }
     }, [petId, history]);
 
     const onAlertDismiss = () => {
@@ -81,6 +83,9 @@ const PetForm = ({
         } else {
             setNameErrorMessage('');
             setIsDisabled(false);
+            const updatedPet = { ...pet, name: input };
+            console.log(updatedPet);
+            setPet(updatedPet);
         }
     };
 
@@ -118,7 +123,7 @@ const PetForm = ({
                         className="form-control-sm"
                         defaultValue={pet?.name}
                         onBlur={onNameChangeHandler} />
-                        <ValidationError>{nameErrorMessage}</ValidationError>
+                    <ValidationError>{nameErrorMessage}</ValidationError>
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="imageUrl">ImageUrl</Label>
@@ -138,7 +143,7 @@ const PetForm = ({
                         id="category"
                         className="form-control-sm"
                         value={pet?.category}
-                        onBlur={onChangeHandler}>
+                        onChange={onChangeHandler}>
                         {categories.map(x =>
                             <option key={x.id} defaultValue={x.name}>{x.name}</option>
                         )}

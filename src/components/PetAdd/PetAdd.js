@@ -16,6 +16,7 @@ const PetAdd = ({
             isAdopted: false,
             wantToAdopt: false,
         }
+        console.log(newPet);
         let newPetKey = firebase.database().ref('pets').push(newPet).key;
         console.log(newPetKey);
         history.push(`/pets/${newPetKey}`);
